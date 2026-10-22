@@ -58,7 +58,7 @@ npm install
 npm test            # oda mantığı testleri (bellek içi depo)
 ```
 
-Üretimde veri (hesaplar, oturumlar, odalar, ayarlar) **Upstash Redis**'te tutulur. Vercel'de Marketplace'ten Upstash Redis'i projeye bağlayınca `KV_REST_API_URL` ve `KV_REST_API_TOKEN` otomatik eklenir (`UPSTASH_REDIS_REST_URL/TOKEN` de kabul edilir). Bu değişkenler yoksa yedek olarak `BLOB_READ_WRITE_TOKEN` ile private Vercel Blob kullanılır; Blob'un ücretsiz işlem kotası küçük olduğundan önerilmez. Odalar 12 saat, oturumlar 31 gün sonra kendiliğinden silinir.
+Üretimde veri (hesaplar, oturumlar, odalar, ayarlar) **Upstash Redis**'te tutulur. Vercel'de Marketplace'ten Upstash Redis'i projeye bağlayınca `KV_REST_API_URL` ve `KV_REST_API_TOKEN` otomatik eklenir (`UPSTASH_REDIS_REST_URL/TOKEN` de kabul edilir). Marketplace'teki standart "Redis" sağlayıcısı kullanılırsa `REDIS_URL` (TCP) okunur. Bu değişkenler yoksa yedek olarak `BLOB_READ_WRITE_TOKEN` ile private Vercel Blob kullanılır; Blob'un ücretsiz işlem kotası küçük olduğundan önerilmez. Odalar 12 saat, oturumlar 31 gün sonra kendiliğinden silinir.
 
 ## Vercel
 

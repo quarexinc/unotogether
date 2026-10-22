@@ -1,6 +1,6 @@
 // Redis deposu sözleşme testi: sahte bir Redis istemcisiyle aynı davranış beklenir (npm test).
 import assert from 'node:assert/strict';
-import { redisStore, memoryStore } from '../lib/store.js';
+import { redisStore, memoryStore, nodeRedis } from '../lib/store.js';
 
 function fakeRedis() {
   const kv = new Map(); const z = new Map();
@@ -18,7 +18,11 @@ function fakeRedis() {
 }
 
 let n = 0;
-for (const [name, mk] of [['redis', () => redisStore(fakeRedis())], ['bellek', () => memoryStore()]]) {
+const real = process.env.TEST_REDIS_URL ? nodeRedis(process.env.TEST_REDIS_URL) : null;
+const cases = [['redis (sahte)', () => redisStore(fakeRedis())], ['bellek', () => memoryStore()]];
+if (real) cases.push(['gerçek redis', () => redisStore(real)]);
+for (const [name, mk] of cases) {
+  if (real && name === 'gerçek redis') await real.eval("for _,k in ipairs(redis.call('KEYS','*')) do redis.call('DEL',k) end return 1", [], []);
   const s = mk();
   assert.equal(await s.read('ABCDE'), null);
   assert.equal(await s.create('ABCDE', { a: 1 }), true);
@@ -46,4 +50,5 @@ for (const [name, mk] of [['redis', () => redisStore(fakeRedis())], ['bellek', (
   assert.deepEqual(await s.kvList('users/'), ['users/x.json']);
   console.log(`  ok ${++n} ${name} deposu aynı davranır`);
 }
+if (real) await real.quit();
 console.log(`\n${n} test geçti`);
