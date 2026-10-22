@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kartmasa</title>
+<meta name="description" content="Arkadaşlarınla anında oda kur, kodu paylaş, sohbet et ve masaüstü uygulamayla oyuna geç.">
+<meta name="theme-color" content="#0a0310">
+<meta property="og:title" content="Kartmasa">
+<meta property="og:description" content="Oda kur, kodu paylaş, uygulamayla oyuna geç.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;800&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="app">
+
+<header class="bar">
+  <a class="brand" href="/" aria-label="Kartmasa">
+    <img src="/logo.svg" alt="" width="34" height="34">
+    <span class="brand-name">KARTMASA</span>
+    <span class="pill"><i></i>ONLINE</span>
+  </a>
+  <nav class="nav" aria-label="Ana menü">
+    <a href="#modes" data-i="nav_modes">Oyun Modları</a>
+    <a href="#rooms" data-i="nav_rooms">Açık Odalar</a>
+    <a href="#rules" data-i="nav_rules">Kurallar</a>
+    <a href="#community" data-i="nav_comm">Topluluk</a>
+  </nav>
+  <div class="bar-right">
+    <div class="lang" role="group" aria-label="Dil">
+      <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </div>
+    <a class="btn ghost sm app-dl" data-app="dl" href="#" rel="noopener" target="_blank" data-i="download">Uygulamayı İndir</a>
+    <button class="btn hot sm" type="button" data-open="create" data-i="create">Oda Oluştur</button>
+  </div>
+</header>
+
+<main id="home">
+
+  <section class="hero" aria-labelledby="h1">
+    <div class="hero-copy">
+      <p class="eyebrow" data-i="hero_k">Arkadaşlarınla kart masası</p>
+      <h1 id="h1"><span data-i="hero_a">Masayı kur,</span> <em data-i="hero_b">rekabeti başlat!</em></h1>
+      <p class="lead" data-i="hero_p">Arkadaşların için anında oda aç, kodu paylaş ve sohbet et. Herkes hazır olduğunda masaüstü uygulamayla oyuna geçin.</p>
+      <div class="cta">
+        <button class="btn hot lg" type="button" data-open="create" data-i="create">Oda Oluştur</button>
+        <button class="btn line lg" type="button" data-open="join" data-i="join">Odaya Katıl</button>
+        <a class="btn ghost lg app-dl" data-app="dl" href="#" rel="noopener" target="_blank" data-i="download">Uygulamayı İndir</a>
+      </div>
+      <dl class="stats">
+        <div><dt data-i="stat_rooms">Açık oda</dt><dd id="st-rooms">–</dd></div>
+        <div><dt data-i="stat_players">Bekleyen oyuncu</dt><dd id="st-players">–</dd></div>
+        <div><dt data-i="stat_modes">Oyun modu</dt><dd>5</dd></div>
+      </dl>
+    </div>
+    <div class="fan" aria-hidden="true">
+      <div class="card c-m fan-1"><b class="cv tl">8</b><span class="gem">8</span><b class="cv br">8</b></div>
+      <div class="card c-t fan-2"><b class="cv tl">3</b><span class="gem">3</span><b class="cv br">3</b></div>
+      <div class="card c-w fan-3"><b class="cv tl">+4</b><span class="gem">+4</span><b class="cv br">+4</b></div>
+    </div>
+  </section>
+
+  <section class="band atmos" aria-labelledby="atm-h">
+    <div class="sec-head">
+      <p class="eyebrow" data-i="atm_k">Masadan bir kare</p>
+      <h2 id="atm-h" data-i="atm_h">Oyunun havasını hisset</h2>
+      <p class="sub" data-i="atm_p">Kart kaosunu, masa atmosferini ve temposunu yakından gör.</p>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="felt"></div>
+      <div class="seat s-top"><span class="av a1"></span></div>
+      <div class="seat s-left"><span class="av a2"></span></div>
+      <div class="seat s-right"><span class="av a3"></span></div>
+      <div class="pile">
+        <div class="card back p1"></div>
+        <div class="card c-a p2"><b class="cv tl">5</b><span class="gem">5</span><b class="cv br">5</b></div>
+        <div class="card c-v fly f1"><b class="cv tl">2</b><span class="gem">2</span><b class="cv br">2</b></div>
+        <div class="card c-t fly f2"><b class="cv tl">9</b><span class="gem">9</span><b class="cv br">9</b></div>
+        <div class="card c-m fly f3"><b class="cv tl">7</b><span class="gem">7</span><b class="cv br">7</b></div>
+      </div>
+      <p class="stage-text"><strong data-i="atm_big">Masa kur. Arkadaşlarını çağır. Kartları karıştır.</strong><span data-i="atm_small">Tek bir kodla lobiye gir, sohbet et ve uygulamayla oyuna geç.</span></p>
+    </div>
+  </section>
+
+  <section class="band" id="how" aria-labelledby="how-h">
+    <div class="sec-head">
+      <p class="eyebrow" data-i="how_k">Üç adımda masa</p>
+      <h2 id="how-h" data-i="how_h">Nasıl çalışır?</h2>
+      <p class="sub" data-i="how_p">Oda sistemini birkaç saniyede kullanmaya başla.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="n">01</span><h3 data-i="s1h">Odanı oluştur</h3><p data-i="s1p">Avatarını, modu ve oyuncu kapasitesini seç.</p></li>
+      <li><span class="n">02</span><h3 data-i="s2h">Kodu paylaş</h3><p data-i="s2p">Oda kodunu veya davet linkini arkadaşlarına gönder ve lobiyi doldur.</p></li>
+      <li><span class="n">03</span><h3 data-i="s3h">Uygulamayla başla</h3><p data-i="s3p">Herkes hazır olduğunda masaüstü uygulamayı aç. Oyun tarayıcıda oynanmaz, uygulama gerekir.</p></li>
+    </ol>
+  </section>
+
+  <section class="band" id="rooms" aria-labelledby="rooms-h">
+    <div class="sec-head">
+      <p class="eyebrow" data-i="open_k">Canlı lobi</p>
+      <h2 id="rooms-h" data-i="open_h">Açık odalar</h2>
+      <p class="sub" data-i="open_p">Kod bilmeden de katılabilirsin. Bekleyen masalar burada görünür.</p>
+    </div>
+    <ul class="roomlist" id="roomlist"></ul>
+    <p class="empty" id="roomempty" data-i="open_empty">Şu an bekleyen oda yok. İlk masayı sen kur.</p>
+  </section>
+
+  <section class="band" id="modes" aria-labelledby="modes-h">
+    <div class="sec-head">
+      <p class="eyebrow" data-i="modes_k">Masanı seç</p>
+      <h2 id="modes-h" data-i="modes_h">Oyun modları</h2>
+      <p class="sub" data-i="modes_p">Bir moda dokun, oda oluşturma ekranı seçiminle açılsın.</p>
+    </div>
+    <div class="modes">
+      <button type="button" class="mode" data-mode="standart"><b data-i="m_standart">Standart</b><span data-i="md_standart">Klasik kurallarla dengeli maçlar.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-mode="acimasiz"><b data-i="m_acimasiz">Acımasız</b><span data-i="md_acimasiz">+6, ceza istifleme ve daha sert cezalar.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-mode="cift"><b data-i="m_cift">Çift Taraf</b><span data-i="md_cift">Çevir kartıyla karanlık tarafa geç, cezalar büyür.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-mode="parti"><b data-i="m_parti">Parti</b><span data-i="md_parti">Çift deste, 10 kişiye kadar kalabalık masa.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-mode="hizli"><b data-i="m_hizli">Hızlı</b><span data-i="md_hizli">12 saniyelik hamle süresiyle yarış.</span><i data-i="pick">Seç ve oda kur</i></button>
+    </div>
+  </section>
+
+  <section class="band" id="rules" aria-labelledby="rules-h">
+    <div class="sec-head">
+      <p class="eyebrow" data-i="rules_k">Masa düzeni</p>
+      <h2 id="rules-h" data-i="rules_h">Kurallar</h2>
+      <p class="sub" data-i="rules_p">Her oyuncu için net ve anlaşılır bir akış.</p>
+    </div>
+    <div class="rules">
+      <article><h3 data-i="r1h">Renk veya sayı eşleştir.</h3><p data-i="r1p">Ortadaki karta uygun renk, sayı ya da özel kart oynayabilirsin.</p></article>
+      <article><h3 data-i="r2h">TEK de.</h3><p data-i="r2p">Elinde tek kart kalınca TEK! çağrısı yap. Unutursan rakipler seni yakalar ve 2 kart çekersin.</p></article>
+      <article><h3 data-i="r3h">Sıra sende mi?</h3><p data-i="r3p">Oynayabileceğin kart yoksa desteden çek. Çektiğin kart uyuyorsa hemen oynayabilirsin.</p></article>
+    </div>
+    <ul class="legend">
+      <li><span class="card mini c-v"><span class="gem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M6.5 17.5l11-11"/></svg></span></span><p data-i="lg_s">Atla: sıradaki oyuncu sırasını kaybeder.</p></li>
+      <li><span class="card mini c-t"><span class="gem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12l-3-3M19 15H7l3 3"/></svg></span></span><p data-i="lg_r">Yön: oyun yönü tersine döner.</p></li>
+      <li><span class="card mini c-m"><span class="gem">+2</span></span><p data-i="lg_d">Çek: sıradaki oyuncu kart çeker ve sırasını kaybeder.</p></li>
+      <li><span class="card mini c-w"><span class="gem">+4</span></span><p data-i="lg_q">Joker: rengi sen seçersin. +4 ise büyük ceza verir.</p></li>
+      <li><span class="card mini c-a"><span class="gem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4"/></svg></span></span><p data-i="lg_f">Çevir: Çift Taraf modunda masa karanlık tarafa geçer.</p></li>
+    </ul>
+  </section>
+
+  <section class="band" id="community" aria-labelledby="comm-h">
+    <div class="sec-head">
+      <p class="eyebrow" data-i="comm_k">Oyuncu kültürü</p>
+      <h2 id="comm-h" data-i="comm_h">Topluluk</h2>
+      <p class="sub" data-i="comm_p">Masaların temel prensipleri.</p>
+    </div>
+    <div class="rules">
+      <article><h3 data-i="c1h">Saygılı sohbet</h3><p data-i="c1p">Sohbeti diğer oyuncuları rahatsız etmeyecek şekilde kullan.</p></article>
+      <article><h3 data-i="c2h">Adil oyun</h3><p data-i="c2p">Hile, spam ve kasıtlı oyun bozma davranışlarından kaçın.</p></article>
+      <article><h3 data-i="c3h">Davetini paylaş</h3><p data-i="c3p">Oda kodunu veya linkini arkadaşlarınla paylaşarak masanı doldur.</p></article>
+    </div>
+  </section>
+</main>
+
+<main id="room" hidden>
+  <div class="rhead">
+    <div class="rcode">
+      <span class="eyebrow" data-i="rcode">Oda kodu</span>
+      <div class="codeline"><code id="r-code">-----</code>
+        <button class="btn line sm" type="button" id="r-copy-code" data-i="copy_code">Kodu kopyala</button>
+        <button class="btn line sm" type="button" id="r-copy-link" data-i="copy_link">Linki kopyala</button>
+      </div>
+    </div>
+    <div class="rmeta"><span class="tag" id="r-mode"></span><span class="tag" id="r-cap"></span></div>
+    <button class="btn ghost sm" type="button" id="r-leave" data-i="leave">Odadan ayrıl</button>
+  </div>
+
+  <div id="r-closed" class="notice" hidden>
+    <p id="r-closed-text"></p>
+    <button class="btn hot" type="button" id="r-home" data-i="back">Ana sayfa</button>
+  </div>
+
+  <div class="rgrid" id="r-body">
+    <section class="lobby">
+      <div id="r-ready" class="ready" hidden>
+        <h3 data-i="ready_h">Masa hazır</h3>
+        <p data-i="ready_p">Oyuna geçmek için masaüstü uygulamayı aç. Oyun tarayıcıda oynanmaz.</p>
+        <div class="ready-cta">
+          <a class="btn hot lg" id="r-open-app" href="#" data-i="open_app">Uygulamada aç</a>
+          <a class="btn line lg" id="r-dl-app" href="#" target="_blank" rel="noopener" data-i="download">Uygulamayı İndir</a>
+        </div>
+        <p class="soft" id="r-app-note" hidden data-i="app_soon">Uygulama bağlantısı henüz eklenmedi.</p>
+      </div>
+      <ul class="players" id="r-players"></ul>
+      <div class="hostbar" id="r-hostbar">
+        <button class="btn hot lg" type="button" id="r-start" data-i="start">Masayı başlat</button>
+        <button class="btn line lg" type="button" id="r-reopen" hidden data-i="reopen">Beklemeye al</button>
+        <p class="soft" id="r-hint"></p>
+      </div>
+    </section>
+    <aside class="chat" aria-label="Sohbet">
+      <h3 data-i="chat">Sohbet</h3>
+      <ul id="r-chat" class="chatlist" aria-live="polite"></ul>
+      <form id="r-form" autocomplete="off">
+        <input id="r-text" maxlength="200" data-ip="chat_ph" placeholder="Bir mesaj yaz…" aria-label="Mesaj">
+        <button class="btn hot" type="submit" data-i="send">Gönder</button>
+      </form>
+    </aside>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot-brand"><img src="/logo.svg" alt="" width="28" height="28"><b>KARTMASA</b></div>
+  <p data-i="foot">Arkadaşlarınla anında masa kur.</p>
+  <nav aria-label="Alt menü"><a href="#modes" data-i="nav_modes">Oyun Modları</a><a href="#rules" data-i="nav_rules">Kurallar</a><a href="#community" data-i="nav_comm">Topluluk</a></nav>
+  <p class="fine"><span data-i="foot_note">Bağımsız bir kart oyunu projesidir; herhangi bir marka ile bağlantısı yoktur.</span> © 2026 Kartmasa</p>
+</footer>
+
+<!-- Oda oluştur -->
+<div class="modal" id="m-create" hidden role="dialog" aria-modal="true" aria-labelledby="cr-h">
+  <form class="sheet" id="f-create" autocomplete="off">
+    <button class="x" type="button" data-close aria-label="Kapat">×</button>
+    <h2 id="cr-h" data-i="cr_h">Yeni oda oluştur</h2>
+    <p class="sub" data-i="cr_p">Adını, avatarını ve oyun modunu seç. Oda kodun hemen oluşturulur.</p>
+    <label class="field"><span data-i="f_name">Kullanıcı adı</span><input id="cr-name" maxlength="16" required></label>
+    <div class="field"><span data-i="f_avatar">Avatarını seç</span><div class="avgrid" id="cr-av"></div></div>
+    <div class="field"><span data-i="f_mode">Oyun modu</span><div class="chips" id="cr-mode"></div></div>
+    <div class="field"><span data-i="f_cap">Oyuncu sayısı</span><div class="chips" id="cr-cap"></div></div>
+    <p class="err" id="cr-err" role="alert"></p>
+    <button class="btn hot lg wide" type="submit" id="cr-go" data-i="cr_go">Odayı kur!</button>
+  </form>
+</div>
+
+<!-- Odaya katıl -->
+<div class="modal" id="m-join" hidden role="dialog" aria-modal="true" aria-labelledby="jn-h">
+  <form class="sheet" id="f-join" autocomplete="off">
+    <button class="x" type="button" data-close aria-label="Kapat">×</button>
+    <h2 id="jn-h" data-i="jn_h">Odaya katıl</h2>
+    <p class="sub" data-i="jn_p">Arkadaşının gönderdiği oda kodunu veya linkini yaz.</p>
+    <label class="field"><span data-i="f_code">Oda kodu veya linki</span><input id="jn-code" required class="mono"></label>
+    <label class="field"><span data-i="f_name">Kullanıcı adı</span><input id="jn-name" maxlength="16" required></label>
+    <div class="field"><span data-i="f_avatar">Avatarını seç</span><div class="avgrid" id="jn-av"></div></div>
+    <p class="err" id="jn-err" role="alert"></p>
+    <button class="btn hot lg wide" type="submit" id="jn-go" data-i="jn_go">Odaya git</button>
+  </form>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</div>
+<script src="/config.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

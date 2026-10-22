@@ -1,0 +1,14 @@
+{
+  "name": "kartmasa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Arkadaşlarınla oda kur, davet kodunu paylaş, uygulamayla oyuna geç.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node test/rooms.test.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.2"
+  }
+}
