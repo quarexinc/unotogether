@@ -3,7 +3,7 @@
   const $ = (s) => document.querySelector(s);
   const ERR = { bad_login: 'Mevcut parola yanlış.', password: 'Yeni parola en az 8 karakter olmalı.', name: 'Görünen ad boş olamaz.', rate: 'Çok hızlı denedin, biraz bekle.', login_required: 'Oturumun bitmiş. Tekrar giriş yap.' };
   const msg = (e) => ERR[e && e.code] || 'Bir sorun oluştu. Tekrar dene.';
-  const PERM = { create: 'Oda kur', join: 'Odaya katıl', chat: 'Sohbet', start: 'Odayı başlat', download: 'Uygulamayı indir' };
+  const PERM = { create: 'Oda kur', join: 'Odaya katıl', chat: 'Sohbet', start: 'Odayı başlat', download: 'Uygulamayı indir', media: 'Ses ve kamera' };
   let av = 0;
 
   document.querySelectorAll('[data-pw]').forEach((b) => b.addEventListener('click', () => {

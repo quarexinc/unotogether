@@ -403,6 +403,7 @@
     S = null; R = null; lastSig = ''; lastChatId = -1; prevIds = null; prevStatus = null;
     clearTimeout(pollT); clearInterval(pingT);
     LS.del('km-session');
+    document.dispatchEvent(new CustomEvent('km:roomend'));
     loadRooms();
   }
   function enterRoom(sess) {
@@ -426,6 +427,7 @@
   function showEnded(msg) {
     clearTimeout(pollT); clearInterval(pingT);
     LS.del('km-session');
+    document.dispatchEvent(new CustomEvent('km:roomend'));
     S = null;
     $('#r-closed-text').textContent = msg;
     $('#r-closed').hidden = false;
@@ -444,6 +446,7 @@
     }
     pollT = setTimeout(poll, document.hidden ? 5000 : 1500);
   }
+  window.KMRoom = { me() { const p = R && S ? R.players.find((q) => q.id === S.pid) : null; return p ? { name: p.name, av: p.av } : {}; } };
   async function ping() {
     if (!S) return;
     try { await api('POST', { action: 'ping', ...S }); } catch (e) {

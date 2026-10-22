@@ -11,6 +11,9 @@
     },
     "api/admin.js": {
       "maxDuration": 15
+    },
+    "api/rtc.js": {
+      "maxDuration": 15
     }
   },
   "headers": [

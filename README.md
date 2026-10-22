@@ -32,6 +32,12 @@ Yönetim paneli › Yönlendirmeler sekmesinden ziyaretçilere gösterilecek yö
 
 Panelde ayrıca: kullanıcı arama/filtreleme, toplu işlemler, CSV dışa aktarma, kullanıcı notları, oda sohbetini görme, oda ve toplu duyuru, yavaş mod, yasaklı kelimeler, oda sınırı ve işlem günlüğü bulunur.
 
+### Sesli ve görüntülü sohbet
+
+Oda ekranındaki "Konuşmaya katıl" ile mikrofon ve kamera açılır. Ses ve görüntü tarayıcılar arasında doğrudan (WebRTC, mesh) akar, sunucudan geçmez; `/api/rtc` yalnızca bağlantı mesajlarını (SDP) taşır ve gelen kutuları `rtc/KOD/` altında özel Blob deposunda tutulur. Konuşma en fazla 8 kişiyle sınırlıdır (herkes herkese bağlandığı için). `media` yetkisi misafir için kapalı, yeni üye için açıktır; kullanıcı bazında Kullanıcılar sekmesinden kapatılabilir.
+
+Yalnızca STUN kullanılır; bazı mobil ve kurumsal ağlarda doğrudan bağlantı kurulamaz. Bunun için **Ayarlar › TURN sunucusu** alanına bir TURN adresi (örn. `turn:sunucu.com:3478`), kullanıcı adı ve parola yazılabilir (Cloudflare Realtime, Metered veya kendi coturn'ün).
+
 ## Uygulama bağlantısı (config.js, yedek)
 
 `public/config.js` dosyasını doldur:

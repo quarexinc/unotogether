@@ -7,7 +7,7 @@
     a.className = 'btn ' + cls; a.textContent = text; a.href = href;
     return a;
   };
-  const PERM = { create: 'oda kurabilir', join: 'odalara katılabilir', chat: 'sohbet edebilir', start: 'masa başlatabilir', download: 'uygulamayı indirebilir' };
+  const PERM = { create: 'oda kurabilir', join: 'odalara katılabilir', chat: 'sohbet edebilir', start: 'masa başlatabilir', download: 'uygulamayı indirebilir', media: 'sesli ve görüntülü konuşabilir' };
 
   // masa sahnesi: dört koltukta avatar
   [['#ts1', 0], ['#ts2', 8], ['#ts3', 3], ['#ts4', 14]].forEach(([sel, i]) => { const el = $(sel); if (el && window.KMAV) el.appendChild(window.KMAV.avEl(i)); });

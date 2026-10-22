@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
-  const PERMS = [['create', 'Oda kur'], ['join', 'Odaya katıl'], ['chat', 'Sohbet'], ['start', 'Odayı başlat'], ['download', 'Uygulamayı indir']];
+  const PERMS = [['create', 'Oda kur'], ['join', 'Odaya katıl'], ['chat', 'Sohbet'], ['start', 'Odayı başlat'], ['download', 'Uygulamayı indir'], ['media', 'Ses ve kamera']];
   const MODE = { standart: 'Standart', parti: 'Parti', hizli: 'Hızlı' };
   const ERR = {
     login_required: 'Oturum bulunamadı. Tekrar giriş yap.', admin_only: 'Bu işlem için yönetici olmalısın.',
@@ -12,6 +12,7 @@
     gate_url: 'Adres, sitenin kendi yolu (/indir gibi) ya da https:// ile başlayan bir adres olmalı.',
     gate_text: 'Pencere ve bant kurallarında başlık ya da mesajdan en az biri gerekir.',
     gate_many: 'En fazla 30 kural eklenebilir.', gate: 'Kural geçersiz.',
+    turn_url: 'TURN adresi turn: veya turns: ile başlamalı (örn. turn:sunucu.com:3478).',
     chat_slow: 'Yavaş mod 0–10000 ms arasında olmalı.', max_rooms: 'Oda sınırı 0–500 arasında bir sayı olmalı.',
     text: 'Mesaj boş olamaz.', busy: 'Kayıt meşgul, tekrar dene.', perm: 'Yetki geçersiz.',
   };
@@ -507,6 +508,9 @@
     const appOpen = input({ placeholder: 'kartmasa://oda/{code}', maxlength: '200', value: s.appOpenUrl || '' });
     const slow = input({ type: 'number', min: '0', max: '10000', step: '100', value: String(s.chatSlowMs) });
     const maxRooms = input({ type: 'number', min: '0', max: '500', value: String(s.maxRooms) });
+    const turnUrl = input({ placeholder: 'turn:sunucu.com:3478', maxlength: '200', value: s.turnUrl || '' });
+    const turnUser = input({ placeholder: 'kullanıcı adı', maxlength: '200', value: s.turnUser || '', autocomplete: 'off' });
+    const turnPass = input({ placeholder: 'parola', maxlength: '200', value: s.turnPass || '', autocomplete: 'off' });
     const words = h('textarea', { rows: '3', placeholder: 'Her satıra ya da virgülle ayırarak bir sözcük', value: (s.bannedWords || []).join('\n') });
     const form = h('form', { class: 'panel', novalidate: true },
       h('div', { class: 'form-grid' },
@@ -519,6 +523,9 @@
       h('div', { class: 'form-grid' },
         field('Sohbet yavaş modu (milisaniye)', slow, 'Bir oyuncunun iki mesajı arasındaki en kısa süre. 0 = sınırsız.'),
         field('Aynı anda en fazla açık oda', maxRooms, '0 = sınırsız. Sınıra ulaşınca yeni oda kurulamaz.')),
+      h('div', { class: 'form-grid' },
+        field('TURN sunucusu (isteğe bağlı)', turnUrl, 'Sesli/görüntülü konuşmada doğrudan bağlanamayan kişiler (bazı mobil ağlar, kurumsal ağlar) için aktarma sunucusu. Boşsa yalnızca doğrudan bağlantı denenir.'),
+        field('TURN kullanıcı adı', turnUser), field('TURN parolası', turnPass)),
       field('Sohbette gizlenen sözcükler', words, 'Bu sözcükler sohbette *** olarak görünür. Büyük/küçük harf fark etmez.'),
       err, ok, h('div', null, h('button', { class: 'btn hot', type: 'submit' }, 'Ayarları kaydet')));
     form.addEventListener('submit', async (e) => {
@@ -527,7 +534,8 @@
       try {
         S.settings = (await api('POST', { a: 'settings', settings: {
           registration: r ? r.value : undefined, guest: s.guest, member: s.member, appUrl: appUrl.value, appOpenUrl: appOpen.value,
-          chatSlowMs: Number(slow.value), maxRooms: Number(maxRooms.value), bannedWords: words.value } })).settings;
+          chatSlowMs: Number(slow.value), maxRooms: Number(maxRooms.value), bannedWords: words.value,
+          turnUrl: turnUrl.value, turnUser: turnUser.value, turnPass: turnPass.value } })).settings;
         flash(ok, 'Kaydedildi.'); renderSettings();
       } catch (x) { err.textContent = msg(x); }
     });
