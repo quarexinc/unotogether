@@ -80,8 +80,8 @@
 
   <div class="marquee" aria-hidden="true">
     <div class="mq-track">
-      <div class="mq-group"><span data-i="s1h">Odanı oluştur</span><span data-i="s2h">Kodu paylaş</span><span data-i="chat">Sohbet</span><span data-i="s3h">Uygulamayla başla</span><span data-i="m_standart">Standart</span><span data-i="m_acimasiz">Acımasız</span><span data-i="m_cift">Çift Taraf</span><span data-i="m_parti">Parti</span><span data-i="m_hizli">Hızlı</span></div>
-      <div class="mq-group"><span data-i="s1h">Odanı oluştur</span><span data-i="s2h">Kodu paylaş</span><span data-i="chat">Sohbet</span><span data-i="s3h">Uygulamayla başla</span><span data-i="m_standart">Standart</span><span data-i="m_acimasiz">Acımasız</span><span data-i="m_cift">Çift Taraf</span><span data-i="m_parti">Parti</span><span data-i="m_hizli">Hızlı</span></div>
+      <div class="mq-group"><span data-i="s1h">Odanı oluştur</span><span data-i="s2h">Kodu paylaş</span><span data-i="chat">Sohbet</span><span data-i="s3h">Uygulamayla başla</span><span data-i="m_standart">Standart</span><span data-i="m_parti">Parti</span><span data-i="m_hizli">Hızlı</span></div>
+      <div class="mq-group"><span data-i="s1h">Odanı oluştur</span><span data-i="s2h">Kodu paylaş</span><span data-i="chat">Sohbet</span><span data-i="s3h">Uygulamayla başla</span><span data-i="m_standart">Standart</span><span data-i="m_parti">Parti</span><span data-i="m_hizli">Hızlı</span></div>
     </div>
   </div>
 
@@ -138,11 +138,9 @@
       <p class="sub" data-i="modes_p">Bir moda dokun, oda oluşturma ekranı seçiminle açılsın.</p>
     </div>
     <div class="modes">
-      <button type="button" class="mode" data-tilt data-mode="standart"><b data-i="m_standart">Standart</b><span data-i="md_standart">Klasik kurallarla dengeli maçlar.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-tilt data-mode="acimasiz"><b data-i="m_acimasiz">Acımasız</b><span data-i="md_acimasiz">+6, ceza istifleme ve daha sert cezalar.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-tilt data-mode="cift"><b data-i="m_cift">Çift Taraf</b><span data-i="md_cift">Çevir kartıyla karanlık tarafa geç, cezalar büyür.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-tilt data-mode="parti"><b data-i="m_parti">Parti</b><span data-i="md_parti">Çift deste, 10 kişiye kadar kalabalık masa.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-tilt data-mode="hizli"><b data-i="m_hizli">Hızlı</b><span data-i="md_hizli">12 saniyelik hamle süresiyle yarış.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="standart"><b data-i="m_standart">Standart</b><span data-i="md_standart">Resmî klasik kurallar, 108 kartlık deste, 10 kişiye kadar.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="parti"><b data-i="m_parti">Parti</b><span data-i="md_parti">Aynı kurallar, arkadaş grubu için kalabalık masa.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="hizli"><b data-i="m_hizli">Hızlı</b><span data-i="md_hizli">Aynı kurallar, 12 saniyelik hamle süresiyle.</span><i data-i="pick">Seç ve oda kur</i></button>
     </div>
   </section>
 
@@ -153,16 +151,17 @@
       <p class="sub" data-i="rules_p">Her oyuncu için net ve anlaşılır bir akış.</p>
     </div>
     <div class="rules">
+      <article data-tilt><h3 data-i="r4h">7 kartla başla.</h3><p data-i="r4p">Her oyuncuya 7 kart dağıtılır, destenin üstündeki kart açılır. Sırayla oynanır.</p></article>
       <article data-tilt><h3 data-i="r1h">Renk veya sayı eşleştir.</h3><p data-i="r1p">Ortadaki karta uygun renk, sayı ya da özel kart oynayabilirsin.</p></article>
-      <article data-tilt><h3 data-i="r2h">TEK de.</h3><p data-i="r2p">Elinde tek kart kalınca TEK! çağrısı yap. Unutursan rakipler seni yakalar ve 2 kart çekersin.</p></article>
-      <article data-tilt><h3 data-i="r3h">Sıra sende mi?</h3><p data-i="r3p">Oynayabileceğin kart yoksa desteden çek. Çektiğin kart uyuyorsa hemen oynayabilirsin.</p></article>
+      <article data-tilt><h3 data-i="r3h">Sıra sende mi?</h3><p data-i="r3p">Oynayabileceğin kart yoksa desteden bir kart çek. Uyuyorsa oynayabilir, uymuyorsa sırayı geçersin.</p></article>
+      <article data-tilt><h3 data-i="r2h">TEK de.</h3><p data-i="r2p">Elinde tek kart kalınca TEK! çağrısı yap. Unutursan yakalanır ve 2 kart çekersin.</p></article>
+      <article data-tilt><h3 data-i="r5h">Eli ilk bitiren kazanır.</h3><p data-i="r5p">Elindeki son kartı oynayan turu alır. Rakiplerin elinde kalan kartlar puan olarak toplanır, 500 puana ulaşan oyunu kazanır.</p></article>
     </div>
     <ul class="legend">
       <li><span class="card mini c-v"><span class="gem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M6.5 17.5l11-11"/></svg></span></span><p data-i="lg_s">Atla: sıradaki oyuncu sırasını kaybeder.</p></li>
       <li><span class="card mini c-t"><span class="gem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12l-3-3M19 15H7l3 3"/></svg></span></span><p data-i="lg_r">Yön: oyun yönü tersine döner.</p></li>
       <li><span class="card mini c-m"><span class="gem">+2</span></span><p data-i="lg_d">Çek: sıradaki oyuncu kart çeker ve sırasını kaybeder.</p></li>
-      <li><span class="card mini c-w"><span class="gem">+4</span></span><p data-i="lg_q">Joker: rengi sen seçersin. +4 ise büyük ceza verir.</p></li>
-      <li><span class="card mini c-a"><span class="gem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4"/></svg></span></span><p data-i="lg_f">Çevir: Çift Taraf modunda masa karanlık tarafa geçer.</p></li>
+      <li><span class="card mini c-w"><span class="gem">+4</span></span><p data-i="lg_q">Joker: rengi sen seçersin. +4 ise sıradaki 4 kart çeker; yalnızca elinde o renkten kart yokken oynanır, itiraz edilebilir.</p></li>
     </ul>
   </section>
 

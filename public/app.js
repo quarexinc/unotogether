@@ -50,29 +50,28 @@
     modes_p: ['Bir moda dokun, oda oluşturma ekranı seçiminle açılsın.', 'Tap a mode and the create screen opens with it selected.', 'Tippe auf einen Modus, der Erstellen-Dialog öffnet sich damit.'],
     pick: ['Seç ve oda kur', 'Pick and create', 'Wählen und erstellen'],
     m_standart: ['Standart', 'Classic', 'Klassisch'],
-    md_standart: ['Klasik kurallarla dengeli maçlar.', 'Balanced matches with the classic rules.', 'Ausgewogene Partien mit klassischen Regeln.'],
-    m_acimasiz: ['Acımasız', 'Ruthless', 'Gnadenlos'],
-    md_acimasiz: ['+6, ceza istifleme ve daha sert cezalar.', '+6, stacking penalties and harsher draws.', '+6, Strafen stapeln und härtere Strafen.'],
-    m_cift: ['Çift Taraf', 'Two-Sided', 'Zweiseitig'],
-    md_cift: ['Çevir kartıyla karanlık tarafa geç, cezalar büyür.', 'Flip to the dark side where penalties grow.', 'Wechsle auf die dunkle Seite, wo Strafen wachsen.'],
+    md_standart: ['Resmî klasik kurallar, 108 kartlık deste, 10 kişiye kadar.', 'Official classic rules, 108-card deck, up to 10 players.', 'Offizielle klassische Regeln, 108 Karten, bis zu 10 Spieler.'],
     m_parti: ['Parti', 'Party', 'Party'],
-    md_parti: ['Çift deste, 10 kişiye kadar kalabalık masa.', 'Double deck, tables of up to 10 players.', 'Doppeltes Deck, Tische mit bis zu 10 Spielern.'],
+    md_parti: ['Aynı kurallar, arkadaş grubu için kalabalık masa.', 'Same rules, a big table for a group of friends.', 'Gleiche Regeln, ein großer Tisch für die Freundesgruppe.'],
     m_hizli: ['Hızlı', 'Fast', 'Schnell'],
-    md_hizli: ['12 saniyelik hamle süresiyle yarış.', 'Race against a 12 second move timer.', 'Wettlauf gegen 12 Sekunden pro Zug.'],
+    md_hizli: ['Aynı kurallar, 12 saniyelik hamle süresiyle.', 'Same rules with a 12 second move timer.', 'Gleiche Regeln mit 12 Sekunden pro Zug.'],
     rules_k: ['Masa düzeni', 'Table etiquette', 'Tischordnung'],
     rules_h: ['Kurallar', 'Rules', 'Regeln'],
     rules_p: ['Her oyuncu için net ve anlaşılır bir akış.', 'A clear flow for every player.', 'Ein klarer Ablauf für jeden Spieler.'],
     r1h: ['Renk veya sayı eşleştir.', 'Match color or number.', 'Farbe oder Zahl passend legen.'],
     r1p: ['Ortadaki karta uygun renk, sayı ya da özel kart oynayabilirsin.', 'Play a card of the same color, the same number, or a special card.', 'Lege dieselbe Farbe, dieselbe Zahl oder eine Spezialkarte.'],
     r2h: ['TEK de.', 'Call TEK.', 'Sag TEK.'],
-    r2p: ['Elinde tek kart kalınca TEK! çağrısı yap. Unutursan rakipler seni yakalar ve 2 kart çekersin.', 'With one card left, call TEK!. If you forget, rivals catch you and you draw 2.', 'Bei einer Karte ruf TEK!. Vergisst du es, fangen dich die Gegner und du ziehst 2.'],
+    r2p: ['Elinde tek kart kalınca TEK! çağrısı yap. Unutursan yakalanır ve 2 kart çekersin.', 'With one card left, call TEK!. If you forget and get caught, you draw 2.', 'Bei einer Karte ruf TEK!. Vergisst du es und wirst erwischt, ziehst du 2.'],
+    r4h: ['7 kartla başla.', 'Start with 7 cards.', 'Starte mit 7 Karten.'],
+    r4p: ['Her oyuncuya 7 kart dağıtılır, destenin üstündeki kart açılır. Sırayla oynanır.', 'Everyone gets 7 cards and the top card of the deck is turned over. Play goes in turn.', 'Jeder bekommt 7 Karten, die oberste Karte wird aufgedeckt. Es wird reihum gespielt.'],
+    r5h: ['Eli ilk bitiren kazanır.', 'First to empty their hand wins.', 'Wer zuerst keine Karten hat, gewinnt.'],
+    r5p: ['Elindeki son kartı oynayan turu alır. Rakiplerin elinde kalan kartlar puan olarak toplanır, 500 puana ulaşan oyunu kazanır.', 'Whoever plays their last card wins the round and scores the points left in rivals’ hands. First to 500 wins the game.', 'Wer die letzte Karte legt, gewinnt die Runde und erhält die Punkte der Gegner. Wer zuerst 500 erreicht, gewinnt.'],
     r3h: ['Sıra sende mi?', 'Your turn?', 'Bist du dran?'],
-    r3p: ['Oynayabileceğin kart yoksa desteden çek. Çektiğin kart uyuyorsa hemen oynayabilirsin.', 'No playable card? Draw from the deck. If it fits, you can play it right away.', 'Keine passende Karte? Zieh vom Stapel. Passt sie, darfst du sie sofort spielen.'],
+    r3p: ['Oynayabileceğin kart yoksa desteden bir kart çek. Uyuyorsa oynayabilir, uymuyorsa sırayı geçersin.', 'No playable card? Draw one. If it fits you may play it, otherwise your turn passes.', 'Keine passende Karte? Zieh eine. Passt sie, darfst du sie legen, sonst ist der Nächste dran.'],
     lg_s: ['Atla: sıradaki oyuncu sırasını kaybeder.', 'Skip: the next player loses their turn.', 'Aussetzen: Der nächste Spieler verliert seinen Zug.'],
     lg_r: ['Yön: oyun yönü tersine döner.', 'Reverse: the direction of play flips.', 'Richtung: Die Spielrichtung dreht sich um.'],
     lg_d: ['Çek: sıradaki oyuncu kart çeker ve sırasını kaybeder.', 'Draw: the next player draws cards and loses their turn.', 'Ziehen: Der nächste Spieler zieht Karten und setzt aus.'],
-    lg_q: ['Joker: rengi sen seçersin. +4 ise büyük ceza verir.', 'Wild: you choose the color. The +4 hits hard.', 'Joker: Du wählst die Farbe. Der +4 trifft hart.'],
-    lg_f: ['Çevir: Çift Taraf modunda masa karanlık tarafa geçer.', 'Flip: in Two-Sided mode the table moves to the dark side.', 'Wenden: Im Zweiseitig-Modus wechselt der Tisch auf die dunkle Seite.'],
+    lg_q: ['Joker: rengi sen seçersin. +4 ise sıradaki 4 kart çeker; yalnızca elinde o renkten kart yokken oynanır, itiraz edilebilir.', 'Wild: you choose the color. The +4 makes the next player draw 4; only playable with no card of the current color, and it can be challenged.', 'Joker: Du wählst die Farbe. Der +4 lässt den Nächsten 4 ziehen; nur ohne passende Farbe, Anzweifeln erlaubt.'],
     comm_k: ['Oyuncu kültürü', 'Player culture', 'Spielerkultur'],
     comm_h: ['Topluluk', 'Community', 'Community'],
     comm_p: ['Masaların temel prensipleri.', 'The basic principles of every table.', 'Die Grundprinzipien jedes Tisches.'],
@@ -231,7 +230,7 @@
   }
 
   // ---------- yardımcılar ----------
-  const MODE_MAX = { standart: 8, acimasiz: 8, cift: 6, parti: 10, hizli: 8 };
+  const MODE_MAX = { standart: 10, parti: 10, hizli: 8 };
   const modeName = (m) => t('m_' + m);
   let toastT;
   function toast(msg) {
