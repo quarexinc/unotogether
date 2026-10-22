@@ -10,12 +10,14 @@
 <meta property="og:description" content="Oda kur, kodu paylaş, uygulamayla oyuna geç.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;800&display=swap">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+<canvas id="fx-bg" aria-hidden="true"></canvas>
 <div id="app">
 
 <header class="bar">
@@ -35,6 +37,16 @@
       <button type="button" data-lang="tr" aria-pressed="true">TR</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
       <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </div>
+    <div class="snd">
+      <button class="icon-btn" id="snd-btn" type="button" data-state="on" aria-haspopup="true" aria-expanded="false" aria-controls="snd-pop" data-ia="snd" aria-label="Ses">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor" stroke="none"/><path class="w1" d="M15.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M18 6.5a8 8 0 0 1 0 11"/><path class="mx" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+      </button>
+      <div class="pop" id="snd-pop" hidden>
+        <label class="sw"><input type="checkbox" id="snd-fx" checked><i></i><span data-i="snd_fx">Ses efektleri</span></label>
+        <label class="sw"><input type="checkbox" id="snd-music"><i></i><span data-i="snd_music">Arka plan müziği</span></label>
+        <label class="rng"><span data-i="snd_vol">Ses seviyesi</span><input type="range" id="snd-vol" min="0" max="100" value="60"></label>
+      </div>
     </div>
     <a class="btn ghost sm app-dl" data-app="dl" href="#" rel="noopener" target="_blank" data-i="download">Uygulamayı İndir</a>
     <button class="btn hot sm" type="button" data-open="create" data-i="create">Oda Oluştur</button>
@@ -66,7 +78,14 @@
     </div>
   </section>
 
-  <section class="band atmos" aria-labelledby="atm-h">
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <div class="mq-group"><span data-i="s1h">Odanı oluştur</span><span data-i="s2h">Kodu paylaş</span><span data-i="chat">Sohbet</span><span data-i="s3h">Uygulamayla başla</span><span data-i="m_standart">Standart</span><span data-i="m_acimasiz">Acımasız</span><span data-i="m_cift">Çift Taraf</span><span data-i="m_parti">Parti</span><span data-i="m_hizli">Hızlı</span></div>
+      <div class="mq-group"><span data-i="s1h">Odanı oluştur</span><span data-i="s2h">Kodu paylaş</span><span data-i="chat">Sohbet</span><span data-i="s3h">Uygulamayla başla</span><span data-i="m_standart">Standart</span><span data-i="m_acimasiz">Acımasız</span><span data-i="m_cift">Çift Taraf</span><span data-i="m_parti">Parti</span><span data-i="m_hizli">Hızlı</span></div>
+    </div>
+  </div>
+
+  <section class="band atmos" data-rv="0" aria-labelledby="atm-h">
     <div class="sec-head">
       <p class="eyebrow" data-i="atm_k">Masadan bir kare</p>
       <h2 id="atm-h" data-i="atm_h">Oyunun havasını hisset</h2>
@@ -74,9 +93,10 @@
     </div>
     <div class="stage" aria-hidden="true">
       <div class="felt"></div>
-      <div class="seat s-top"><span class="av a1"></span></div>
-      <div class="seat s-left"><span class="av a2"></span></div>
-      <div class="seat s-right"><span class="av a3"></span></div>
+      <div class="seat s-top"><span class="av" data-av="3"></span><em>Ada</em></div>
+      <div class="seat s-left"><span class="av" data-av="6"></span><em>Bora</em></div>
+      <div class="seat s-right"><span class="av" data-av="8"></span><em>Elif</em></div>
+      <div class="bubble">TEK!</div>
       <div class="pile">
         <div class="card back p1"></div>
         <div class="card c-a p2"><b class="cv tl">5</b><span class="gem">5</span><b class="cv br">5</b></div>
@@ -88,20 +108,20 @@
     </div>
   </section>
 
-  <section class="band" id="how" aria-labelledby="how-h">
+  <section class="band" data-rv="0" id="how" aria-labelledby="how-h">
     <div class="sec-head">
       <p class="eyebrow" data-i="how_k">Üç adımda masa</p>
       <h2 id="how-h" data-i="how_h">Nasıl çalışır?</h2>
       <p class="sub" data-i="how_p">Oda sistemini birkaç saniyede kullanmaya başla.</p>
     </div>
     <ol class="steps">
-      <li><span class="n">01</span><h3 data-i="s1h">Odanı oluştur</h3><p data-i="s1p">Avatarını, modu ve oyuncu kapasitesini seç.</p></li>
-      <li><span class="n">02</span><h3 data-i="s2h">Kodu paylaş</h3><p data-i="s2p">Oda kodunu veya davet linkini arkadaşlarına gönder ve lobiyi doldur.</p></li>
-      <li><span class="n">03</span><h3 data-i="s3h">Uygulamayla başla</h3><p data-i="s3p">Herkes hazır olduğunda masaüstü uygulamayı aç. Oyun tarayıcıda oynanmaz, uygulama gerekir.</p></li>
+      <li data-rv="1" data-tilt><span class="n">01</span><h3 data-i="s1h">Odanı oluştur</h3><p data-i="s1p">Avatarını, modu ve oyuncu kapasitesini seç.</p></li>
+      <li data-rv="2" data-tilt><span class="n">02</span><h3 data-i="s2h">Kodu paylaş</h3><p data-i="s2p">Oda kodunu veya davet linkini arkadaşlarına gönder ve lobiyi doldur.</p></li>
+      <li data-rv="3" data-tilt><span class="n">03</span><h3 data-i="s3h">Uygulamayla başla</h3><p data-i="s3p">Herkes hazır olduğunda masaüstü uygulamayı aç. Oyun tarayıcıda oynanmaz, uygulama gerekir.</p></li>
     </ol>
   </section>
 
-  <section class="band" id="rooms" aria-labelledby="rooms-h">
+  <section class="band" data-rv="0" id="rooms" aria-labelledby="rooms-h">
     <div class="sec-head">
       <p class="eyebrow" data-i="open_k">Canlı lobi</p>
       <h2 id="rooms-h" data-i="open_h">Açık odalar</h2>
@@ -111,31 +131,31 @@
     <p class="empty" id="roomempty" data-i="open_empty">Şu an bekleyen oda yok. İlk masayı sen kur.</p>
   </section>
 
-  <section class="band" id="modes" aria-labelledby="modes-h">
+  <section class="band" data-rv="0" id="modes" aria-labelledby="modes-h">
     <div class="sec-head">
       <p class="eyebrow" data-i="modes_k">Masanı seç</p>
       <h2 id="modes-h" data-i="modes_h">Oyun modları</h2>
       <p class="sub" data-i="modes_p">Bir moda dokun, oda oluşturma ekranı seçiminle açılsın.</p>
     </div>
     <div class="modes">
-      <button type="button" class="mode" data-mode="standart"><b data-i="m_standart">Standart</b><span data-i="md_standart">Klasik kurallarla dengeli maçlar.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-mode="acimasiz"><b data-i="m_acimasiz">Acımasız</b><span data-i="md_acimasiz">+6, ceza istifleme ve daha sert cezalar.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-mode="cift"><b data-i="m_cift">Çift Taraf</b><span data-i="md_cift">Çevir kartıyla karanlık tarafa geç, cezalar büyür.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-mode="parti"><b data-i="m_parti">Parti</b><span data-i="md_parti">Çift deste, 10 kişiye kadar kalabalık masa.</span><i data-i="pick">Seç ve oda kur</i></button>
-      <button type="button" class="mode" data-mode="hizli"><b data-i="m_hizli">Hızlı</b><span data-i="md_hizli">12 saniyelik hamle süresiyle yarış.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="standart"><b data-i="m_standart">Standart</b><span data-i="md_standart">Klasik kurallarla dengeli maçlar.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="acimasiz"><b data-i="m_acimasiz">Acımasız</b><span data-i="md_acimasiz">+6, ceza istifleme ve daha sert cezalar.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="cift"><b data-i="m_cift">Çift Taraf</b><span data-i="md_cift">Çevir kartıyla karanlık tarafa geç, cezalar büyür.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="parti"><b data-i="m_parti">Parti</b><span data-i="md_parti">Çift deste, 10 kişiye kadar kalabalık masa.</span><i data-i="pick">Seç ve oda kur</i></button>
+      <button type="button" class="mode" data-tilt data-mode="hizli"><b data-i="m_hizli">Hızlı</b><span data-i="md_hizli">12 saniyelik hamle süresiyle yarış.</span><i data-i="pick">Seç ve oda kur</i></button>
     </div>
   </section>
 
-  <section class="band" id="rules" aria-labelledby="rules-h">
+  <section class="band" data-rv="0" id="rules" aria-labelledby="rules-h">
     <div class="sec-head">
       <p class="eyebrow" data-i="rules_k">Masa düzeni</p>
       <h2 id="rules-h" data-i="rules_h">Kurallar</h2>
       <p class="sub" data-i="rules_p">Her oyuncu için net ve anlaşılır bir akış.</p>
     </div>
     <div class="rules">
-      <article><h3 data-i="r1h">Renk veya sayı eşleştir.</h3><p data-i="r1p">Ortadaki karta uygun renk, sayı ya da özel kart oynayabilirsin.</p></article>
-      <article><h3 data-i="r2h">TEK de.</h3><p data-i="r2p">Elinde tek kart kalınca TEK! çağrısı yap. Unutursan rakipler seni yakalar ve 2 kart çekersin.</p></article>
-      <article><h3 data-i="r3h">Sıra sende mi?</h3><p data-i="r3p">Oynayabileceğin kart yoksa desteden çek. Çektiğin kart uyuyorsa hemen oynayabilirsin.</p></article>
+      <article data-tilt><h3 data-i="r1h">Renk veya sayı eşleştir.</h3><p data-i="r1p">Ortadaki karta uygun renk, sayı ya da özel kart oynayabilirsin.</p></article>
+      <article data-tilt><h3 data-i="r2h">TEK de.</h3><p data-i="r2p">Elinde tek kart kalınca TEK! çağrısı yap. Unutursan rakipler seni yakalar ve 2 kart çekersin.</p></article>
+      <article data-tilt><h3 data-i="r3h">Sıra sende mi?</h3><p data-i="r3p">Oynayabileceğin kart yoksa desteden çek. Çektiğin kart uyuyorsa hemen oynayabilirsin.</p></article>
     </div>
     <ul class="legend">
       <li><span class="card mini c-v"><span class="gem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M6.5 17.5l11-11"/></svg></span></span><p data-i="lg_s">Atla: sıradaki oyuncu sırasını kaybeder.</p></li>
@@ -146,16 +166,16 @@
     </ul>
   </section>
 
-  <section class="band" id="community" aria-labelledby="comm-h">
+  <section class="band" data-rv="0" id="community" aria-labelledby="comm-h">
     <div class="sec-head">
       <p class="eyebrow" data-i="comm_k">Oyuncu kültürü</p>
       <h2 id="comm-h" data-i="comm_h">Topluluk</h2>
       <p class="sub" data-i="comm_p">Masaların temel prensipleri.</p>
     </div>
     <div class="rules">
-      <article><h3 data-i="c1h">Saygılı sohbet</h3><p data-i="c1p">Sohbeti diğer oyuncuları rahatsız etmeyecek şekilde kullan.</p></article>
-      <article><h3 data-i="c2h">Adil oyun</h3><p data-i="c2p">Hile, spam ve kasıtlı oyun bozma davranışlarından kaçın.</p></article>
-      <article><h3 data-i="c3h">Davetini paylaş</h3><p data-i="c3p">Oda kodunu veya linkini arkadaşlarınla paylaşarak masanı doldur.</p></article>
+      <article data-tilt><h3 data-i="c1h">Saygılı sohbet</h3><p data-i="c1p">Sohbeti diğer oyuncuları rahatsız etmeyecek şekilde kullan.</p></article>
+      <article data-tilt><h3 data-i="c2h">Adil oyun</h3><p data-i="c2p">Hile, spam ve kasıtlı oyun bozma davranışlarından kaçın.</p></article>
+      <article data-tilt><h3 data-i="c3h">Davetini paylaş</h3><p data-i="c3p">Oda kodunu veya linkini arkadaşlarınla paylaşarak masanı doldur.</p></article>
     </div>
   </section>
 </main>
@@ -243,9 +263,11 @@
   </form>
 </div>
 
+<canvas id="fx-confetti" aria-hidden="true"></canvas>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 </div>
 <script src="/config.js"></script>
+<script src="/fx.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>
