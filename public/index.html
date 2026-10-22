@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;800&display=swap">
 <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/pages.css">
 </head>
 <body>
 <canvas id="fx-bg" aria-hidden="true"></canvas>
@@ -48,7 +49,8 @@
         <label class="rng"><span data-i="snd_vol">Ses seviyesi</span><input type="range" id="snd-vol" min="0" max="100" value="60"></label>
       </div>
     </div>
-    <a class="btn ghost sm app-dl" data-app="dl" href="#" rel="noopener" target="_blank" data-i="download">Uygulamayı İndir</a>
+    <a class="btn ghost sm app-dl" data-app="dl" href="/indir" data-i="download">Uygulamayı İndir</a>
+    <div class="acct" id="acct"></div>
     <button class="btn hot sm" type="button" data-open="create" data-i="create">Oda Oluştur</button>
   </div>
 </header>
@@ -204,7 +206,7 @@
         <p data-i="ready_p">Oyuna geçmek için masaüstü uygulamayı aç. Oyun tarayıcıda oynanmaz.</p>
         <div class="ready-cta">
           <a class="btn hot lg" id="r-open-app" href="#" data-i="open_app">Uygulamada aç</a>
-          <a class="btn line lg" id="r-dl-app" href="#" target="_blank" rel="noopener" data-i="download">Uygulamayı İndir</a>
+          <a class="btn line lg" id="r-dl-app" href="/indir" data-i="download">Uygulamayı İndir</a>
         </div>
         <p class="soft" id="r-app-note" hidden data-i="app_soon">Uygulama bağlantısı henüz eklenmedi.</p>
       </div>
@@ -267,6 +269,7 @@
 </div>
 <script src="/config.js"></script>
 <script src="/fx.js"></script>
+<script src="/auth.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>

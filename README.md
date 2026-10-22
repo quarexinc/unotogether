@@ -11,7 +11,19 @@ Oyun tarayıcıda oynanmaz. Site yalnızca oda ve lobi tarafını yürütür.
 - Her oda, **private Vercel Blob** içinde `rooms/KOD.json` olarak tutulur. Yazmalar `ifMatch` (etag) ile yapılır, çakışma olursa yeniden denenir.
 - İstemci odayı yaklaşık 1,5 saniyede bir yoklar (polling). Oyuncular 15 saniyede bir "buradayım" sinyali gönderir. 2 dakikadır görünmeyen oyuncu odadan düşer, oda boşalınca silinir.
 
-## Uygulama bağlantısı
+## Hesaplar, yetkiler ve yönetim paneli
+
+- Sayfalar: `/giris` (giriş ve kayıt), `/indir` (uygulama indirme), `/admin` (yönetim paneli).
+- **İlk kayıt olan hesap yönetici olur.** Siteyi yayınlar yayınlamaz önce sen kayıt ol.
+- Parolalar scrypt ile özetlenir, oturum çerezi HttpOnly + SameSite=Lax'tır. 5 hatalı girişte hesap 5 dakika kilitlenir.
+- Yetkiler: `create` (oda kur), `join` (odaya katıl), `chat` (sohbet), `start` (odayı başlat), `download` (uygulamayı indir).
+  Misafirler (girişsiz) ve yeni üyeler için varsayılanlar **Ayarlar** sekmesinden, her kullanıcının yetkisi **Kullanıcılar** sekmesinden değişir.
+- Kayıt modları: herkese açık, yönetici onaylı, kapalı.
+- Yönetici paneli odaları listeler; odayı başlatabilir, yeniden açabilir, oyuncu atabilir, kapatabilir.
+- Hesaplar `users/`, oturumlar `sessions/`, ayarlar `meta/settings.json` olarak aynı private Blob deposunda tutulur.
+- İndirme bağlantısını **Ayarlar** sekmesine yaz. `config.js`'teki bağlantı herkese açık olduğundan indirme yetkisini denetleyemez.
+
+## Uygulama bağlantısı (config.js, yedek)
 
 `public/config.js` dosyasını doldur:
 

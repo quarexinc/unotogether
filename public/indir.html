@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Uygulamayı indir · Kartmasa</title>
+<meta name="description" content="Kartmasa masaüstü uygulamasını indir, oda kodunla masana otur.">
+<meta name="theme-color" content="#0a0310">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;800&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/pages.css">
+</head>
+<body>
+<div id="app">
+<header class="bar">
+  <a class="brand" href="/" aria-label="Kartmasa">
+    <img src="/logo.svg" alt="" width="34" height="34">
+    <span class="brand-name">KARTMASA</span>
+  </a>
+  <nav class="nav" aria-label="Menü">
+    <a href="/">Ana sayfa</a>
+    <a href="/indir">Uygulamayı İndir</a>
+  </nav>
+  <div class="bar-right">
+    <div class="acct" id="acct"></div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <p class="eyebrow">Masaüstü uygulaması</p>
+    <h1>Uygulamayı indir</h1>
+    <p>Oyun tarayıcıda değil, masaüstü uygulamada oynanır. Sitede odanı kurar, kodu paylaşır ve sohbet edersin; masa hazır olunca uygulamayı açarsın.</p>
+  </div>
+  <div class="dl-grid">
+    <section class="dl-card" aria-live="polite">
+      <h2 id="dl-h">Kontrol ediliyor…</h2>
+      <p class="note" id="dl-p"></p>
+      <div class="dl-cta" id="dl-cta"></div>
+    </section>
+    <section class="panel">
+      <h3>Kurulum adımları</h3>
+      <ol class="steps-list">
+        <li><div><b>Uygulamayı indir</b><span>Yandaki ya da yukarıdaki düğmeyle kurulum dosyasını indir.</span></div></li>
+        <li><div><b>Kur ve aç</b><span>Kurulum dosyasını çalıştır, uygulamayı başlat.</span></div></li>
+        <li><div><b>Siteden oda kur</b><span>Oda kodunu arkadaşlarınla paylaş, herkes katılınca masayı başlat.</span></div></li>
+        <li><div><b>Uygulamada oyna</b><span>“Masa hazır” ekranından uygulamayı aç ve oyuna geç.</span></div></li>
+      </ol>
+      <p class="alert">Kurulum dosyasını yalnızca bu sayfadaki bağlantıdan indir. Tanımadığın kişilerin gönderdiği kurulum dosyalarını çalıştırma.</p>
+    </section>
+  </div>
+</main>
+</div>
+<script src="/config.js"></script>
+<script src="/auth.js"></script>
+<script src="/indir.js"></script>
+</body>
+</html>

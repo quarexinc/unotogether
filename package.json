@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Arkadaşlarınla oda kur, davet kodunu paylaş, uygulamayla oyuna geç.",
-  "engines": { "node": ">=20" },
+  "description": "Arkada\u015flar\u0131nla oda kur, davet kodunu payla\u015f, uygulamayla oyuna ge\u00e7.",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "test": "node test/rooms.test.mjs"
+    "test": "node test/rooms.test.mjs && node test/accounts.test.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2"

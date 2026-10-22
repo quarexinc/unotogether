@@ -138,6 +138,10 @@
     snd_fx: ['Ses efektleri', 'Sound effects', 'Soundeffekte'],
     snd_music: ['Arka plan müziği', 'Background music', 'Hintergrundmusik'],
     snd_vol: ['Ses seviyesi', 'Volume', 'Lautstärke'],
+    e_login: ['Bunun için giriş yapmalısın. Sağ üstten giriş yap veya kayıt ol.', 'You need to sign in for this. Use the button at the top right.', 'Dafür musst du dich anmelden. Nutze die Schaltfläche oben rechts.'],
+    e_perm: ['Bu işlem için yetkin yok. Bir yönetici yetki verebilir.', 'You do not have permission for this. An admin can grant it.', 'Dafür fehlt dir die Berechtigung. Ein Admin kann sie dir geben.'],
+    e_blocked: ['Hesabın engellendi.', 'Your account is blocked.', 'Dein Konto ist gesperrt.'],
+    e_pending: ['Hesabın yönetici onayını bekliyor.', 'Your account is waiting for admin approval.', 'Dein Konto wartet auf die Freigabe durch einen Admin.'],
     e_host: ['Bu işlem için ev sahibi olmalısın.', 'Only the host can do that.', 'Das kann nur der Gastgeber.'],
   };
   const LANGS = ['tr', 'en', 'de'];
@@ -253,7 +257,7 @@
     return j;
   }
   function errText(e) {
-    const m = { name: 'e_name', code: 'e_code', not_found: 'e_nf', full: 'e_full', started: 'e_started', rate: 'e_rate', host_only: 'e_host' };
+    const m = { name: 'e_name', code: 'e_code', not_found: 'e_nf', full: 'e_full', started: 'e_started', rate: 'e_rate', host_only: 'e_host', login_required: 'e_login', no_perm: 'e_perm', blocked: 'e_blocked', pending: 'e_pending' };
     return t(m[e && e.code] || 'e_fail');
   }
   async function copyText(s) {
@@ -269,12 +273,16 @@
   }
 
   // ---------- uygulama bağlantıları ----------
+  // İndirme düğmeleri her zaman /indir sayfasına gider; yetki ve bağlantı orada denetlenir.
   function wireAppLinks() {
-    $$('[data-app="dl"]').forEach((a) => {
-      if (CFG.appUrl) { a.href = CFG.appUrl; a.classList.remove('off'); a.removeAttribute('aria-disabled'); a.removeAttribute('title'); }
-      else { a.href = '#'; a.classList.add('off'); a.setAttribute('aria-disabled', 'true'); a.title = t('app_soon'); }
-    });
+    $$('[data-app="dl"]').forEach((a) => { a.href = '/indir'; a.classList.remove('off'); a.removeAttribute('aria-disabled'); a.removeAttribute('title'); a.removeAttribute('target'); });
   }
+  // "Uygulamada aç" bağlantısı sunucudaki ayardan gelir (yoksa config.js).
+  let appOpenUrl = CFG.appOpenUrl || '';
+  fetch('/api/auth?a=app', { cache: 'no-store', credentials: 'same-origin' })
+    .then((r) => r.json())
+    .then((j) => { if (j && j.appOpenUrl) appOpenUrl = j.appOpenUrl; if (R) { lastSig = ''; renderRoom(); } })
+    .catch(() => {});
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a.off');
     if (a) { e.preventDefault(); toast(t('app_soon')); }
@@ -339,9 +347,10 @@
       cg.appendChild(b);
     }
   }
+  const acctName = () => (window.KMAuth && window.KMAuth.state.user ? window.KMAuth.state.user.display : '');
   function prepCreate() {
     $('#cr-err').textContent = '';
-    $('#cr-name').value = profile.name;
+    $('#cr-name').value = profile.name || acctName();
     buildAvatarGrid('#cr-av', () => profile.av, (i) => { profile.av = i; });
     buildChips();
   }
@@ -354,7 +363,7 @@
   function prepJoin(code) {
     $('#jn-err').textContent = '';
     if (code) $('#jn-code').value = code;
-    $('#jn-name').value = profile.name;
+    $('#jn-name').value = profile.name || acctName();
     buildAvatarGrid('#jn-av', () => profile.av, (i) => { profile.av = i; });
   }
   $$('[data-open="join"]').forEach((b) => b.addEventListener('click', () => prepJoin()));
@@ -556,10 +565,10 @@
     $('#r-ready').hidden = !ready;
     if (ready) {
       const open = $('#r-open-app'); const dl = $('#r-dl-app');
-      const href = CFG.appOpenUrl ? CFG.appOpenUrl.replace('{code}', encodeURIComponent(S.code)) : '';
+      const href = appOpenUrl ? appOpenUrl.replace('{code}', encodeURIComponent(S.code)) : '';
       if (href) { open.href = href; open.classList.remove('off'); } else { open.href = '#'; open.classList.add('off'); }
-      if (CFG.appUrl) { dl.href = CFG.appUrl; dl.classList.remove('off'); } else { dl.href = '#'; dl.classList.add('off'); }
-      $('#r-app-note').hidden = !!(href || CFG.appUrl);
+      dl.href = '/indir'; dl.classList.remove('off');
+      $('#r-app-note').hidden = true;
     }
     const start = $('#r-start'); const reopen = $('#r-reopen'); const hint = $('#r-hint');
     start.hidden = !isHost || ready;

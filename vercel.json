@@ -5,6 +5,12 @@
   "functions": {
     "api/rooms.js": {
       "maxDuration": 15
+    },
+    "api/auth.js": {
+      "maxDuration": 15
+    },
+    "api/admin.js": {
+      "maxDuration": 15
     }
   },
   "headers": [

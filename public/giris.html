@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Giriş yap · Kartmasa</title>
+<meta name="description" content="Kartmasa hesabınla giriş yap veya yeni hesap oluştur.">
+<meta name="theme-color" content="#0a0310">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;800&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/pages.css">
+</head>
+<body>
+<div id="app">
+<header class="bar">
+  <a class="brand" href="/" aria-label="Kartmasa">
+    <img src="/logo.svg" alt="" width="34" height="34">
+    <span class="brand-name">KARTMASA</span>
+  </a>
+  <nav class="nav" aria-label="Menü">
+    <a href="/">Ana sayfa</a>
+    <a href="/indir">Uygulamayı İndir</a>
+  </nav>
+  <div class="bar-right">
+    <div class="acct" id="acct"></div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="auth-wrap">
+    <div class="page-head">
+      <p class="eyebrow">Hesap</p>
+      <h1 id="h1">Giriş yap</h1>
+    </div>
+    <div id="already" class="panel" hidden>
+      <h2>Zaten giriş yaptın</h2>
+      <p class="note" id="already-p"></p>
+      <div class="dl-cta">
+        <a class="btn hot" href="/" id="go-home">Ana sayfaya dön</a>
+        <button class="btn line" type="button" id="do-logout">Çıkış yap</button>
+      </div>
+    </div>
+    <div id="forms">
+      <div class="tabs" role="tablist" aria-label="Hesap işlemi">
+        <button type="button" role="tab" id="t-login" aria-selected="true">Giriş</button>
+        <button type="button" role="tab" id="t-reg" aria-selected="false">Kayıt ol</button>
+      </div>
+      <form class="panel" id="f-login" autocomplete="on" novalidate>
+        <label class="field"><span>Kullanıcı adı</span><input name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required maxlength="20"></label>
+        <label class="field"><span>Parola</span><input name="password" type="password" autocomplete="current-password" required maxlength="100"></label>
+        <p class="err" id="err-login" role="alert"></p>
+        <button class="btn hot lg wide" type="submit" id="go-login">Giriş yap</button>
+      </form>
+      <form class="panel" id="f-reg" autocomplete="on" novalidate hidden>
+        <label class="field"><span>Kullanıcı adı</span><input name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required maxlength="20" pattern="[A-Za-z0-9_]{3,20}"><small class="hint">3–20 karakter: harf, rakam ve alt çizgi.</small></label>
+        <label class="field"><span>Görünen ad</span><input name="display" maxlength="16" autocomplete="nickname"><small class="hint">Odalarda bu ad görünür. Boş bırakırsan kullanıcı adın kullanılır.</small></label>
+        <label class="field"><span>Parola</span><input name="password" type="password" autocomplete="new-password" required minlength="8" maxlength="100"><small class="hint">En az 8 karakter.</small></label>
+        <p class="alert" id="reg-note" hidden></p>
+        <p class="err" id="err-reg" role="alert"></p>
+        <button class="btn hot lg wide" type="submit" id="go-reg">Hesap oluştur</button>
+      </form>
+    </div>
+  </div>
+</main>
+</div>
+<script src="/config.js"></script>
+<script src="/auth.js"></script>
+<script src="/giris.js"></script>
+</body>
+</html>
