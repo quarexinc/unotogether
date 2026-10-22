@@ -49,6 +49,7 @@
     pop.appendChild(who);
     const link = (href, text) => { const a = el('a', null, text); a.href = href; return a; };
     if (state.user.role === 'admin') pop.appendChild(link('/admin', 'Yönetim paneli'));
+    pop.appendChild(link('/hesap', 'Hesabım'));
     pop.appendChild(link('/indir', 'Uygulamayı indir'));
     const out = el('button', null, 'Çıkış yap');
     out.type = 'button';

@@ -4,6 +4,8 @@ import { handle } from '../lib/rooms.js';
 import { memoryStore } from '../lib/store.js';
 
 const store = memoryStore();
+// Bu testler misafir akışını sınar: misafir yetkileri açılır (varsayılan kapalıdır).
+await store.kvCreate('meta/settings.json', { guest: { create: true, join: true, chat: true, start: true, download: true } });
 const post = (body, ip = '1.1.1.1') => handle({ method: 'POST', body, ip }, store);
 const get = (query) => handle({ method: 'GET', query }, store);
 let n = 0;

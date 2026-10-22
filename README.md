@@ -13,8 +13,11 @@ Oyun tarayıcıda oynanmaz. Site yalnızca oda ve lobi tarafını yürütür.
 
 ## Hesaplar, yetkiler ve yönetim paneli
 
-- Sayfalar: `/giris` (giriş ve kayıt), `/indir` (uygulama indirme), `/admin` (yönetim paneli).
-- **İlk kayıt olan hesap yönetici olur.** Siteyi yayınlar yayınlamaz önce sen kayıt ol.
+- Sayfalar: `/giris` (giriş ve kayıt), `/hesap` (ad, avatar, parola), `/indir` (uygulama indirme), `/admin` (yönetim paneli).
+- **Oda kurmak ve odaya katılmak için hesap gerekir** (misafir yetkileri varsayılan olarak kapalıdır, Ayarlar sekmesinden değişir).
+- Yönetici hesabı iki yolla oluşur:
+  - Vercel'de `ADMIN_USERNAME` ve `ADMIN_PASSWORD` ortam değişkenlerini tanımla. Hesap ilk doğru girişte oluşur, bu ad kayıt için ayrılır ve parolayı panelden/Hesabım sayfasından değiştirince ortam değişkeni geçersiz olur. Bu durumda ilk kayıt yönetici olmaz.
+  - Değişken tanımlı değilse **ilk kayıt olan hesap yönetici olur.**
 - Parolalar scrypt ile özetlenir, oturum çerezi HttpOnly + SameSite=Lax'tır. 5 hatalı girişte hesap 5 dakika kilitlenir.
 - Yetkiler: `create` (oda kur), `join` (odaya katıl), `chat` (sohbet), `start` (odayı başlat), `download` (uygulamayı indir).
   Misafirler (girişsiz) ve yeni üyeler için varsayılanlar **Ayarlar** sekmesinden, her kullanıcının yetkisi **Kullanıcılar** sekmesinden değişir.

@@ -7,8 +7,32 @@
     a.className = 'btn ' + cls; a.textContent = text; a.href = href;
     return a;
   };
+  const PERM = { create: 'oda kurabilir', join: 'odalara katılabilir', chat: 'sohbet edebilir', start: 'masa başlatabilir', download: 'uygulamayı indirebilir' };
+
+  // masa sahnesi: dört koltukta avatar
+  [['#ts1', 0], ['#ts2', 8], ['#ts3', 3], ['#ts4', 14]].forEach(([sel, i]) => { const el = $(sel); if (el && window.KMAV) el.appendChild(window.KMAV.avEl(i)); });
+
+  function bottom(state) {
+    const box = $('#cta-links'); box.textContent = '';
+    if (state.user) {
+      box.append(btn('hot lg', 'Ana sayfaya dön ve oda kur', '/'), btn('line lg', 'Hesabım', '/hesap'));
+    } else {
+      box.append(btn('hot lg', 'Kayıt ol', '/giris?kayit=1&next=' + encodeURIComponent('/indir')), btn('line lg', 'Giriş yap', '/giris?next=' + encodeURIComponent('/indir')));
+    }
+  }
+
+  function me(state) {
+    if (!state.user) return;
+    $('#mini-me').hidden = false;
+    $('#mm-av').appendChild(window.KMAV.avEl(state.user.av || 0));
+    $('#mm-name').textContent = state.user.display;
+    const ok = Object.keys(PERM).filter((k) => state.user.role === 'admin' || state.perms[k]).map((k) => PERM[k]);
+    $('#mm-perms').textContent = ok.length ? 'Yetkilerin: ' + ok.join(', ') : 'Şu an hiçbir yetkin açık değil.';
+  }
 
   async function run() {
+    const state = window.KMAuth.state;
+    me(state); bottom(state);
     let info;
     try {
       const res = await fetch('/api/auth?a=app', { cache: 'no-store', credentials: 'same-origin' });
@@ -45,7 +69,7 @@
       return;
     }
     h.textContent = 'Kartmasa uygulaması';
-    p.textContent = 'Masaüstü için kurulum dosyası hazır.';
+    p.textContent = 'Kurulum dosyası hazır. İndirdikten sonra çalıştırıp uygulamayı kur.';
     const dl = btn('hot lg', 'Uygulamayı indir', url);
     dl.rel = 'noopener noreferrer';
     cta.appendChild(dl);

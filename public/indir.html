@@ -23,6 +23,7 @@
   <nav class="nav" aria-label="Menü">
     <a href="/">Ana sayfa</a>
     <a href="/indir">Uygulamayı İndir</a>
+    <a href="/#rules">Kurallar</a>
   </nav>
   <div class="bar-right">
     <div class="acct" id="acct"></div>
@@ -30,31 +31,69 @@
 </header>
 
 <main class="page">
-  <div class="page-head">
-    <p class="eyebrow">Masaüstü uygulaması</p>
-    <h1>Uygulamayı indir</h1>
-    <p>Oyun tarayıcıda değil, masaüstü uygulamada oynanır. Sitede odanı kurar, kodu paylaşır ve sohbet edersin; masa hazır olunca uygulamayı açarsın.</p>
-  </div>
-  <div class="dl-grid">
-    <section class="dl-card" aria-live="polite">
-      <h2 id="dl-h">Kontrol ediliyor…</h2>
-      <p class="note" id="dl-p"></p>
-      <div class="dl-cta" id="dl-cta"></div>
-    </section>
-    <section class="panel">
-      <h3>Kurulum adımları</h3>
-      <ol class="steps-list">
-        <li><div><b>Uygulamayı indir</b><span>Yandaki ya da yukarıdaki düğmeyle kurulum dosyasını indir.</span></div></li>
-        <li><div><b>Kur ve aç</b><span>Kurulum dosyasını çalıştır, uygulamayı başlat.</span></div></li>
-        <li><div><b>Siteden oda kur</b><span>Oda kodunu arkadaşlarınla paylaş, herkes katılınca masayı başlat.</span></div></li>
-        <li><div><b>Uygulamada oyna</b><span>“Masa hazır” ekranından uygulamayı aç ve oyuna geç.</span></div></li>
-      </ol>
-      <p class="alert">Kurulum dosyasını yalnızca bu sayfadaki bağlantıdan indir. Tanımadığın kişilerin gönderdiği kurulum dosyalarını çalıştırma.</p>
-    </section>
-  </div>
+  <section class="dl-hero">
+    <div class="dl-copy">
+      <p class="eyebrow">Masaüstü uygulaması</p>
+      <h1>Masana <br>uygulamayla geç.</h1>
+      <p class="lead">Oyun tarayıcıda değil, masaüstü uygulamada oynanır. Sitede odanı kurar, kodu paylaşır ve sohbet edersin; masa hazır olunca uygulamayı açarsın.</p>
+      <div class="dl-card" aria-live="polite">
+        <h2 id="dl-h">Kontrol ediliyor…</h2>
+        <p class="note" id="dl-p"></p>
+        <div class="dl-cta" id="dl-cta"></div>
+      </div>
+      <div class="mini-me" id="mini-me" hidden>
+        <span id="mm-av"></span>
+        <div><b id="mm-name"></b><small id="mm-perms"></small></div>
+      </div>
+    </div>
+    <div class="table-scene" aria-hidden="true">
+      <div class="felt"></div>
+      <div class="tpile"><div class="card back"></div><div class="card c-a"><b class="cv tl">5</b><span class="gem">5</span><b class="cv br">5</b></div></div>
+      <div class="ts s1" id="ts1"></div><div class="ts s2" id="ts2"></div><div class="ts s3" id="ts3"></div><div class="ts s4" id="ts4"></div>
+    </div>
+  </section>
+
+  <section class="band2" aria-labelledby="how-h">
+    <div class="sec-head"><p class="eyebrow">Dört adımda</p><h2 id="how-h">Nasıl oynanır?</h2></div>
+    <ol class="how">
+      <li><b>1</b><h3>Uygulamayı indir</h3><p>Yukarıdaki düğmeyle kurulum dosyasını indir ve kur.</p></li>
+      <li><b>2</b><h3>Giriş yap</h3><p>Siteye hesabınla gir. Hesabın yoksa saniyeler içinde kayıt ol.</p></li>
+      <li><b>3</b><h3>Oda kur ya da katıl</h3><p>Odanı kur, kodu arkadaşlarınla paylaş ya da onların koduyla katıl.</p></li>
+      <li><b>4</b><h3>Uygulamada oyna</h3><p>Ev sahibi masayı başlatınca “Uygulamada aç” ile oyuna geç.</p></li>
+    </ol>
+  </section>
+
+  <section class="band2" aria-labelledby="feat-h">
+    <div class="sec-head"><p class="eyebrow">Masada neler var</p><h2 id="feat-h">Özellikler</h2></div>
+    <div class="feat-grid">
+      <article><h3>Tek kodla davet</h3><p>Beş haneli oda kodu ya da davet linkiyle herkes aynı masaya oturur.</p></article>
+      <article><h3>Lobi sohbeti</h3><p>Oyun başlamadan önce masadakilerle yazış, kimin geldiğini canlı gör.</p></article>
+      <article><h3>20 avatar</h3><p>Çizilmiş insan karakterlerinden birini seç, her odada seninle gelsin.</p></article>
+      <article><h3>Klasik kurallar</h3><p>7 kartla başla, renk ya da sayı eşleştir, eli ilk bitiren turu alır, 500 puana ulaşan kazanır.</p></article>
+      <article><h3>Üç oda modu</h3><p>Standart, Parti ve Hızlı. Standart ve Parti 10 kişiye, Hızlı 8 kişiye kadar.</p></article>
+      <article><h3>Yetki yönetimi</h3><p>Yöneticiler kimin oda kurup katılabileceğini, başlatıp indirebileceğini belirler.</p></article>
+    </div>
+  </section>
+
+  <section class="band2" aria-labelledby="faq-h">
+    <div class="sec-head"><p class="eyebrow">Merak edilenler</p><h2 id="faq-h">Sık sorulanlar</h2></div>
+    <div class="faq">
+      <details><summary>Oyun neden tarayıcıda oynanmıyor?</summary><p>Site yalnızca oda kurma, katılma ve sohbet içindir. Oyunun kendisi masaüstü uygulamada çalışır.</p></details>
+      <details><summary>Oda kurmak ya da katılmak için hesap gerekli mi?</summary><p>Evet. Giriş yapmadan oda kurulamaz ve odaya katılınamaz. Kayıt ücretsiz ve birkaç saniye sürer.</p></details>
+      <details><summary>“İndirme yetkin yok” uyarısı görüyorum.</summary><p>Hesabının indirme yetkisi kapalı demektir. Bir yöneticiden yetki isteyebilirsin.</p></details>
+      <details><summary>Arkadaşım odaya nasıl katılır?</summary><p>Odanın beş haneli kodunu ya da “Linki kopyala” ile aldığın davet linkini gönder. Arkadaşın da giriş yapmış olmalı.</p></details>
+      <details><summary>Kurulum dosyasına güvenebilir miyim?</summary><p>Dosyayı yalnızca bu sayfadaki bağlantıdan indir. Tanımadığın kişilerin gönderdiği kurulum dosyalarını çalıştırma.</p></details>
+    </div>
+  </section>
+
+  <section class="cta-band" id="cta-band">
+    <h2>Masa hazır, sen de gel.</h2>
+    <div class="dl-cta" id="cta-links"></div>
+  </section>
 </main>
 </div>
 <script src="/config.js"></script>
+<script src="/avatars.js"></script>
 <script src="/auth.js"></script>
 <script src="/indir.js"></script>
 </body>

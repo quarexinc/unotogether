@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Giriş yap · Kartmasa</title>
-<meta name="description" content="Kartmasa hesabınla giriş yap veya yeni hesap oluştur.">
+<meta name="description" content="Kartmasa hesabınla giriş yap veya yeni hesap oluştur; oda kur, arkadaşlarına katıl.">
 <meta name="theme-color" content="#0a0310">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +23,7 @@
   <nav class="nav" aria-label="Menü">
     <a href="/">Ana sayfa</a>
     <a href="/indir">Uygulamayı İndir</a>
+    <a href="/#rules">Kurallar</a>
   </nav>
   <div class="bar-right">
     <div class="acct" id="acct"></div>
@@ -30,43 +31,76 @@
 </header>
 
 <main class="page">
-  <div class="auth-wrap">
-    <div class="page-head">
-      <p class="eyebrow">Hesap</p>
-      <h1 id="h1">Giriş yap</h1>
-    </div>
-    <div id="already" class="panel" hidden>
-      <h2>Zaten giriş yaptın</h2>
-      <p class="note" id="already-p"></p>
-      <div class="dl-cta">
-        <a class="btn hot" href="/" id="go-home">Ana sayfaya dön</a>
-        <button class="btn line" type="button" id="do-logout">Çıkış yap</button>
+  <div class="split">
+    <aside class="showcase" aria-label="Kartmasa hakkında">
+      <p class="eyebrow">Kartmasa'ya hoş geldin</p>
+      <h2>Masaya <br>otur.</h2>
+      <p class="lead">Hesabınla oda kur, kodu paylaş, arkadaşlarınla sohbet et. Masa hazır olunca uygulamayı açıp oyuna geçersin.</p>
+      <div class="fan" aria-hidden="true">
+        <div class="card c-m fan-1"><b class="cv tl">7</b><span class="gem">7</span><b class="cv br">7</b></div>
+        <div class="card c-t fan-2"><b class="cv tl">3</b><span class="gem">3</span><b class="cv br">3</b></div>
+        <div class="card c-w fan-3"><b class="cv tl">+4</b><span class="gem">+4</span><b class="cv br">+4</b></div>
       </div>
-    </div>
-    <div id="forms">
-      <div class="tabs" role="tablist" aria-label="Hesap işlemi">
-        <button type="button" role="tab" id="t-login" aria-selected="true">Giriş</button>
-        <button type="button" role="tab" id="t-reg" aria-selected="false">Kayıt ol</button>
+      <div class="avstack" id="avstack" aria-hidden="true"></div>
+      <ul class="perks">
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Oda kur, kodu paylaş</b><span>Beş haneli kod ya da davet linkiyle arkadaşların saniyeler içinde katılır.</span></div></li>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Lobide sohbet et</b><span>Oyun başlamadan önce herkes masada buluşur, konuşur.</span></div></li>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Avatarın seninle gelir</b><span>20 çizilmiş karakterden birini seç, her odada o görünsün.</span></div></li>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Klasik kurallar</b><span>7 kartla başla, eli ilk bitiren turu alır, 500 puana ulaşan oyunu kazanır.</span></div></li>
+      </ul>
+    </aside>
+
+    <div class="auth-wrap">
+      <div class="page-head">
+        <p class="eyebrow">Hesap</p>
+        <h1 id="h1">Giriş yap</h1>
+        <p id="sub">Hesabınla giriş yap, kaldığın yerden devam et.</p>
       </div>
-      <form class="panel" id="f-login" autocomplete="on" novalidate>
-        <label class="field"><span>Kullanıcı adı</span><input name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required maxlength="20"></label>
-        <label class="field"><span>Parola</span><input name="password" type="password" autocomplete="current-password" required maxlength="100"></label>
-        <p class="err" id="err-login" role="alert"></p>
-        <button class="btn hot lg wide" type="submit" id="go-login">Giriş yap</button>
-      </form>
-      <form class="panel" id="f-reg" autocomplete="on" novalidate hidden>
-        <label class="field"><span>Kullanıcı adı</span><input name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required maxlength="20" pattern="[A-Za-z0-9_]{3,20}"><small class="hint">3–20 karakter: harf, rakam ve alt çizgi.</small></label>
-        <label class="field"><span>Görünen ad</span><input name="display" maxlength="16" autocomplete="nickname"><small class="hint">Odalarda bu ad görünür. Boş bırakırsan kullanıcı adın kullanılır.</small></label>
-        <label class="field"><span>Parola</span><input name="password" type="password" autocomplete="new-password" required minlength="8" maxlength="100"><small class="hint">En az 8 karakter.</small></label>
-        <p class="alert" id="reg-note" hidden></p>
-        <p class="err" id="err-reg" role="alert"></p>
-        <button class="btn hot lg wide" type="submit" id="go-reg">Hesap oluştur</button>
-      </form>
+      <p class="alert" id="why" hidden>Oda kurmak ve odaya katılmak için giriş yapman ya da kayıt olman gerekiyor.</p>
+      <div id="already" class="panel" hidden>
+        <h2>Zaten giriş yaptın</h2>
+        <p class="note" id="already-p"></p>
+        <div class="dl-cta">
+          <a class="btn hot" href="/" id="go-home">Ana sayfaya dön</a>
+          <a class="btn line" href="/hesap">Hesabım</a>
+          <button class="btn line" type="button" id="do-logout">Çıkış yap</button>
+        </div>
+      </div>
+      <div id="forms">
+        <div class="tabs" role="tablist" aria-label="Hesap işlemi">
+          <button type="button" role="tab" id="t-login" aria-selected="true">Giriş</button>
+          <button type="button" role="tab" id="t-reg" aria-selected="false">Kayıt ol</button>
+        </div>
+        <form class="panel" id="f-login" autocomplete="on" novalidate>
+          <label class="field"><span>Kullanıcı adı</span><input name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required maxlength="20"></label>
+          <label class="field"><span>Parola</span>
+            <div class="pw"><input name="password" type="password" autocomplete="current-password" required maxlength="100"><button type="button" class="pw-t" aria-label="Parolayı göster" data-pw>Göster</button></div>
+          </label>
+          <p class="err" id="err-login" role="alert"></p>
+          <button class="btn hot lg wide" type="submit" id="go-login">Giriş yap</button>
+          <p class="hint center">Hesabın yok mu? <a href="#" id="to-reg">Kayıt ol</a></p>
+        </form>
+        <form class="panel" id="f-reg" autocomplete="on" novalidate hidden>
+          <label class="field"><span>Kullanıcı adı</span><input name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required maxlength="20" pattern="[A-Za-z0-9_]{3,20}"><small class="hint">3–20 karakter: harf, rakam ve alt çizgi.</small></label>
+          <label class="field"><span>Görünen ad</span><input name="display" maxlength="16" autocomplete="nickname"><small class="hint">Odalarda bu ad görünür. Boş bırakırsan kullanıcı adın kullanılır.</small></label>
+          <div class="field"><span>Avatarını seç</span><div class="avgrid" id="reg-av"></div></div>
+          <label class="field"><span>Parola</span>
+            <div class="pw"><input name="password" id="reg-pw" type="password" autocomplete="new-password" required minlength="8" maxlength="100"><button type="button" class="pw-t" aria-label="Parolayı göster" data-pw>Göster</button></div>
+            <div class="meter" id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <small class="hint" id="meter-t">En az 8 karakter. Harf, rakam ve işaret karıştırırsan daha güçlü olur.</small>
+          </label>
+          <p class="alert" id="reg-note" hidden></p>
+          <p class="err" id="err-reg" role="alert"></p>
+          <button class="btn hot lg wide" type="submit" id="go-reg">Hesap oluştur</button>
+          <p class="hint center">Zaten hesabın var mı? <a href="#" id="to-login">Giriş yap</a></p>
+        </form>
+      </div>
     </div>
   </div>
 </main>
 </div>
 <script src="/config.js"></script>
+<script src="/avatars.js"></script>
 <script src="/auth.js"></script>
 <script src="/giris.js"></script>
 </body>

@@ -223,4 +223,57 @@ r = await auth(null, c3, 'GET');
 assert.equal(r.json.user, null);
 ok('çıkış oturumu siler; başka kaynaktan gelen POST reddedilir');
 
+// varsayılan: misafir oda kuramaz, katılamaz
+{
+  const st = memoryStore();
+  const rm = (body, cookie = '') => handle({ method: 'POST', body, ip: ip(), cookie }, st);
+  const au = (body, cookie = '', method = 'POST', query = {}) => handleAuth({ method, body, query, cookie, ip: ip(), host: 'x.test' }, st);
+  let q = await rm({ action: 'create', name: 'Misafir', mode: 'standart', cap: 4 });
+  assert.equal(q.status, 403);
+  assert.equal(q.json.error, 'login_required');
+  q = await rm({ action: 'join', code: 'ABCDE', name: 'Misafir' });
+  assert.equal(q.json.error, 'login_required');
+  q = await au({ a: 'register', username: 'ilk', password: 'sifre12345', av: 5 });
+  assert.equal(q.json.user.av, 5);
+  const c = q.setCookie.split(';')[0];
+  q = await rm({ action: 'create', name: 'Ilk', av: 5, mode: 'standart', cap: 4 }, c);
+  assert.equal(q.status, 200);
+  q = await au({ a: 'profile', display: 'Yeni Ad', av: 9 }, c);
+  assert.equal(q.json.user.display, 'Yeni Ad');
+  assert.equal(q.json.user.av, 9);
+  q = await au({ a: 'profile', av: 99 }, c);
+  assert.equal(q.status, 400);
+  q = await au({ a: 'profile', display: 'X' }, '');
+  assert.equal(q.status, 401);
+  ok('varsayılan: misafir oda kuramaz/katılamaz, hesapla kurulur; profil güncellenir');
+}
+
+// ortam değişkeniyle tanımlı yönetici
+{
+  process.env.ADMIN_USERNAME = 'Root';
+  process.env.ADMIN_PASSWORD = 'uzun-parola-123';
+  const st = memoryStore();
+  const au = (body, cookie = '', method = 'POST', query = {}) => handleAuth({ method, body, query, cookie, ip: ip(), host: 'x.test' }, st);
+  let q = await au({ a: 'register', username: 'root', password: 'baska-parola1' });
+  assert.equal(q.status, 409);
+  q = await au({ a: 'register', username: 'ilkkayit', password: 'sifre12345' });
+  assert.equal(q.json.user.role, 'user', 'ilk kayıt artık yönetici olmaz');
+  q = await au({ a: 'login', username: 'root', password: 'yanlis-parola' });
+  assert.equal(q.status, 401);
+  q = await au({ a: 'login', username: 'root', password: 'uzun-parola-123' });
+  assert.equal(q.status, 200);
+  assert.equal(q.json.user.role, 'admin');
+  const rc = q.setCookie.split(';')[0];
+  q = await handleAdmin({ method: 'GET', query: { a: 'users' }, cookie: rc, host: 'x.test' }, st);
+  assert.equal(q.status, 200);
+  q = await au({ a: 'password', old: 'uzun-parola-123', next: 'degisti-parola-9' }, rc);
+  assert.equal(q.status, 200);
+  q = await au({ a: 'login', username: 'root', password: 'uzun-parola-123' });
+  assert.equal(q.status, 401, 'parola değişince ortam değişkenindeki parola geçersiz');
+  q = await au({ a: 'login', username: 'root', password: 'degisti-parola-9' });
+  assert.equal(q.status, 200);
+  delete process.env.ADMIN_USERNAME; delete process.env.ADMIN_PASSWORD;
+  ok('ortam değişkeniyle yönetici: ilk girişte oluşur, ad ayrılır, parola değişince env geçersiz');
+}
+
 console.log(`\n${n} test geçti`);
