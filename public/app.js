@@ -387,7 +387,7 @@
   function listLoop() {
     clearTimeout(listT);
     if (!S && !document.hidden) loadRooms();
-    listT = setTimeout(listLoop, 6000);
+    listT = setTimeout(listLoop, 15000);
   }
 
   // ---------- lobi ----------
@@ -422,7 +422,7 @@
     window.scrollTo({ top: 0 });
     clearTimeout(pollT); clearInterval(pingT);
     poll();
-    pingT = setInterval(ping, 15000);
+    pingT = setInterval(ping, 20000);
   }
   function showEnded(msg) {
     clearTimeout(pollT); clearInterval(pingT);
@@ -444,7 +444,7 @@
     } catch (e) {
       if (e.status === 404) { showEnded(t('closed')); return; }
     }
-    pollT = setTimeout(poll, document.hidden ? 5000 : 1500);
+    pollT = setTimeout(poll, document.hidden ? 8000 : 3000);
   }
   window.KMRoom = { me() { const p = R && S ? R.players.find((q) => q.id === S.pid) : null; return p ? { name: p.name, av: p.av } : {}; } };
   async function ping() {

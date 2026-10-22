@@ -346,7 +346,7 @@
     } catch (e) {
       if (e.status === 403 || e.status === 404) { end(ERR[e.code] || 'e_gone'); return; }
     }
-    if (C === me) me.pollT = setTimeout(pollLoop, document.hidden ? 3500 : 1500);
+    if (C === me) me.pollT = setTimeout(pollLoop, document.hidden ? 5000 : 2500);
   }
   async function beatLoop() {
     if (!C) return;
@@ -354,7 +354,7 @@
     try { await refresh(); } catch (e) {
       if (e.status === 403 || e.status === 404) { end(ERR[e.code] || 'e_gone'); return; }
     }
-    if (C === me) me.beatT = setTimeout(beatLoop, 10000);
+    if (C === me) me.beatT = setTimeout(beatLoop, 15000);
   }
 
   // ---------- katıl / ayrıl ----------
@@ -385,7 +385,7 @@
       paint();
       reconcile();
       pollLoop();
-      C.beatT = setTimeout(beatLoop, 10000);
+      C.beatT = setTimeout(beatLoop, 15000);
       FXsfx('whoosh');
     } catch (e) {
       if (audio) audio.stop();

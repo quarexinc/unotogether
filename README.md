@@ -58,8 +58,8 @@ npm install
 npm test            # oda mantığı testleri (bellek içi depo)
 ```
 
-Üretimde fonksiyonun `BLOB_READ_WRITE_TOKEN` ortam değişkenine ihtiyacı vardır. Vercel'de bir Blob deposunu projeye bağlayınca bu değişken otomatik eklenir. Depo **private** olmalıdır.
+Üretimde veri (hesaplar, oturumlar, odalar, ayarlar) **Upstash Redis**'te tutulur. Vercel'de Marketplace'ten Upstash Redis'i projeye bağlayınca `KV_REST_API_URL` ve `KV_REST_API_TOKEN` otomatik eklenir (`UPSTASH_REDIS_REST_URL/TOKEN` de kabul edilir). Bu değişkenler yoksa yedek olarak `BLOB_READ_WRITE_TOKEN` ile private Vercel Blob kullanılır; Blob'un ücretsiz işlem kotası küçük olduğundan önerilmez. Odalar 12 saat, oturumlar 31 gün sonra kendiliğinden silinir.
 
 ## Vercel
 
-Repoyu Vercel'e bağla, çıktı klasörü `public` (vercel.json içinde tanımlı). Bir Blob deposu oluşturup projeye bağla.
+Repoyu Vercel'e bağla, çıktı klasörü `public` (vercel.json içinde tanımlı). Marketplace'ten bir Upstash Redis oluşturup projeye bağla.
