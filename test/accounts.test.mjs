@@ -276,4 +276,134 @@ ok('çıkış oturumu siler; başka kaynaktan gelen POST reddedilir');
   ok('ortam değişkeniyle yönetici: ilk girişte oluşur, ad ayrılır, parola değişince env geçersiz');
 }
 
+
+// yönlendirme kuralları
+{
+  const st = memoryStore();
+  const au = (body, cookie = '', method = 'POST', query = {}) => handleAuth({ method, body, query, cookie, ip: ip(), host: 'x.test' }, st);
+  const ad = (body, cookie, method = 'POST', query = {}) => handleAdmin({ method, body, query, cookie, host: 'x.test' }, st);
+  const rm = (body, cookie = '') => handle({ method: 'POST', body, ip: ip(), cookie }, st);
+  let q = await au({ a: 'register', username: 'ilk', password: 'sifre12345' }); // ilk kayıt yönetici
+  const A = q.setCookie.split(';')[0];
+  q = await au({ a: 'register', username: 'uye', password: 'sifre12345' });
+  const U = q.setCookie.split(';')[0];
+
+  // kural kaydet: doğrulama
+  q = await ad({ a: 'gates_save', rules: [{ name: 'x', enabled: true, audience: { guest: true }, action: 'redirect', url: 'javascript:alert(1)' }] }, A);
+  assert.equal(q.status, 400);
+  q = await ad({ a: 'gates_save', rules: [{ name: 'x', enabled: true, audience: { guest: true }, action: 'redirect', url: '//kotu.example' }] }, A);
+  assert.equal(q.status, 400);
+  q = await ad({ a: 'gates_save', rules: [{ name: 'x', enabled: true, action: 'popup' }] }, A);
+  assert.equal(q.status, 400);
+  q = await ad({ a: 'gates_save', rules: [
+    { name: 'Kayıt ol', enabled: true, audience: { guest: true }, trigger: 'click', action: 'redirect', url: '/giris?kayit=1', freq: 'session' },
+    { name: 'Uygulamayı indir', enabled: true, audience: { noapp: true }, trigger: 'click', action: 'popup', title: 'Önce uygulamayı indirin', ctaLabel: 'İndir', ctaUrl: '/indir', freq: 'hours', hours: 2 },
+    { name: 'Kapalı', enabled: false, audience: { guest: true, noapp: true, app: true }, action: 'banner', message: 'duyuru' },
+  ] }, A);
+  assert.equal(q.status, 200);
+  assert.equal(q.json.rules.length, 3);
+  assert.ok(q.json.rules.every((r) => /^r_/.test(r.id)));
+  const [rKayit, rIndir] = q.json.rules;
+  ok('kurallar doğrulanır: tehlikeli/dış adresler reddedilir, kayıt başarılı');
+
+  // kategoriye göre dağıtım
+  q = await au(null, '', 'GET', { a: 'gates' });
+  assert.equal(q.json.category, 'guest');
+  assert.deepEqual(q.json.rules.map((r) => r.name), ['Kayıt ol']);
+  q = await au(null, U, 'GET', { a: 'gates' });
+  assert.equal(q.json.category, 'noapp');
+  assert.deepEqual(q.json.rules.map((r) => r.name), ['Uygulamayı indir']);
+  q = await au(null, A, 'GET', { a: 'gates' });
+  assert.equal(q.json.category, 'admin');
+  assert.equal(q.json.rules.length, 0, 'yönetici kurallardan muaf');
+  ok('kurallar misafir, indirmemiş üye ve yönetici için doğru dağıtılır');
+
+  // indirme tıklaması üyeyi "indirdi" yapar
+  q = await au({ a: 'dl_click' }, U);
+  assert.equal(q.status, 200);
+  q = await au(null, U, 'GET', { a: 'gates' });
+  assert.equal(q.json.category, 'app');
+  assert.equal(q.json.rules.length, 0);
+  q = await au(null, U, 'GET');
+  assert.equal(q.json.user.dl, true);
+  ok('uygulamayı indiren üye kategorisini değiştirir');
+
+  // olay sayaçları
+  await au({ a: 'gate_event', id: rKayit.id, ev: 'shown' });
+  await au({ a: 'gate_event', id: rKayit.id, ev: 'shown' });
+  await au({ a: 'gate_event', id: rKayit.id, ev: 'click' });
+  q = await au({ a: 'gate_event', id: 'x', ev: 'shown' });
+  assert.equal(q.status, 400);
+  q = await ad(null, A, 'GET', { a: 'gates' });
+  assert.equal(q.json.stats.rules[rKayit.id].shown, 2);
+  assert.equal(q.json.stats.rules[rKayit.id].click, 1);
+  assert.equal(q.json.stats.dl, 1);
+  assert.equal(q.json.stats.dlUsers, 1);
+  q = await ad({ a: 'gate_reset', id: rKayit.id }, A);
+  assert.equal(q.json.stats.rules[rKayit.id], undefined);
+  q = await ad(null, U, 'GET', { a: 'gates' });
+  assert.equal(q.status, 403);
+  ok('kural istatistikleri sayılır, sıfırlanır; üye göremez');
+
+  // toplu işlemler, not, oturum kapatma
+  q = await au({ a: 'register', username: 'ucuncu', password: 'sifre12345' });
+  const C3 = q.setCookie.split(';')[0];
+  q = await ad({ a: 'bulk_users', op: 'perm_off', perm: 'create', usernames: ['uye', 'ucuncu', 'ilk'] }, A);
+  assert.equal(q.json.done, 2, 'yönetici kendini işleme katamaz');
+  q = await ad(null, A, 'GET', { a: 'users' });
+  assert.equal(q.json.users.find((u) => u.username === 'uye').perms.create, false);
+  q = await ad({ a: 'bulk_users', op: 'block', usernames: ['ucuncu'] }, A);
+  q = await au(null, C3, 'GET');
+  assert.equal(q.json.user, null);
+  q = await ad({ a: 'bulk_users', op: 'bogus', usernames: ['ucuncu'] }, A);
+  assert.equal(q.status, 400);
+  q = await ad({ a: 'user', username: 'uye', patch: { note: 'arkadaş <b>' } }, A);
+  assert.equal(q.json.user.note, 'arkadaş  b');
+  q = await au(null, U, 'GET');
+  assert.equal(q.json.user.note, undefined, 'not üyeye sızmaz');
+  q = await ad({ a: 'logout_user', username: 'uye' }, A);
+  q = await au(null, U, 'GET');
+  assert.equal(q.json.user, null);
+  ok('toplu işlem, kullanıcı notu, zorla oturum kapatma');
+
+  // sohbet ayarları: yavaş mod, yasaklı kelime; oda sınırı; duyuru
+  q = await au({ a: 'login', username: 'uye', password: 'sifre12345' });
+  const U2 = q.setCookie.split(';')[0];
+  await ad({ a: 'user', username: 'uye', patch: { perms: { create: true } } }, A);
+  q = await ad({ a: 'settings', settings: { chatSlowMs: 0, bannedWords: 'kötü, Çirkin', maxRooms: 1 } }, A);
+  assert.equal(q.status, 200);
+  assert.deepEqual(q.json.settings.bannedWords, ['kötü', 'Çirkin']);
+  q = await rm({ action: 'create', name: 'Uye', mode: 'standart', cap: 4 }, U2);
+  assert.equal(q.status, 200);
+  const rr = q.json;
+  q = await rm({ action: 'create', name: 'Uye', mode: 'standart', cap: 4 }, U2);
+  assert.equal(q.status, 503);
+  assert.equal(q.json.error, 'rooms_full');
+  await ad({ a: 'settings', settings: { maxRooms: 0 } }, A);
+  q = await rm({ action: 'chat', code: rr.code, pid: rr.pid, key: rr.key, text: 'bu çok KÖTÜ ve çirkin' }, U2);
+  assert.equal(q.status, 200);
+  const last = q.json.room.chat.at(-1);
+  assert.ok(!/kötü|çirkin/i.test(last.text), last.text);
+  assert.match(last.text, /\*\*\*/);
+  q = await rm({ action: 'chat', code: rr.code, pid: rr.pid, key: rr.key, text: 'ikinci' }, U2);
+  assert.equal(q.status, 200, 'yavaş mod 0 iken hemen yazılabilir');
+  q = await ad({ a: 'settings', settings: { chatSlowMs: 99999 } }, A);
+  assert.equal(q.status, 400);
+  q = await ad({ a: 'room_say', code: rr.code, text: 'Yarım saat sonra bakım var' }, A);
+  assert.equal(q.status, 200);
+  q = await ad({ a: 'broadcast', text: 'Herkese merhaba' }, A);
+  assert.equal(q.json.rooms, 1);
+  q = await ad(null, A, 'GET', { a: 'room_chat', code: rr.code });
+  const sysMsgs = q.json.chat.filter((m) => m.sys === 'announce').map((m) => m.name);
+  assert.deepEqual(sysMsgs, ['Yarım saat sonra bakım var', 'Herkese merhaba']);
+  ok('yasaklı kelime, yavaş mod, oda sınırı, oda duyurusu ve toplu duyuru');
+
+  // günlük
+  q = await ad(null, A, 'GET', { a: 'log' });
+  assert.ok(q.json.items.length >= 6);
+  assert.ok(q.json.items.some((i) => i.ev === 'Yönlendirmeler kaydedildi'));
+  assert.ok(q.json.items.some((i) => i.ev === 'Kayıt'));
+  ok('etkinlik günlüğü yazılır ve okunur');
+}
+
 console.log(`\n${n} test geçti`);

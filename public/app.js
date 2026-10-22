@@ -124,6 +124,7 @@
     sys_join: ['{n} odaya katıldı', '{n} joined the room', '{n} ist dem Raum beigetreten'],
     sys_leave: ['{n} odadan ayrıldı', '{n} left the room', '{n} hat den Raum verlassen'],
     sys_start: ['{n} masayı başlattı', '{n} started the table', '{n} hat den Tisch gestartet'],
+    sys_announce: ['Duyuru: {n}', 'Announcement: {n}', 'Ankündigung: {n}'],
     sys_kick: ['{n} odadan çıkarıldı', '{n} was removed', '{n} wurde entfernt'],
     closed: ['Oda kapandı.', 'The room was closed.', 'Der Raum wurde geschlossen.'],
     kicked: ['Bu odadan çıkarıldın ya da oda sona erdi.', 'You were removed from this room or it ended.', 'Du wurdest entfernt oder der Raum wurde beendet.'],

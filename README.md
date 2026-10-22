@@ -26,6 +26,12 @@ Oyun tarayıcıda oynanmaz. Site yalnızca oda ve lobi tarafını yürütür.
 - Hesaplar `users/`, oturumlar `sessions/`, ayarlar `meta/settings.json` olarak aynı private Blob deposunda tutulur.
 - İndirme bağlantısını **Ayarlar** sekmesine yaz. `config.js`'teki bağlantı herkese açık olduğundan indirme yetkisini denetleyemez.
 
+### Yönlendirme kuralları
+
+Yönetim paneli › Yönlendirmeler sekmesinden ziyaretçilere gösterilecek yönlendirmeler tanımlanır: "önce kayıt ol", "önce uygulamayı indirin", duyuru bandı, bakım penceresi vb. Bir kural; kime (misafir / uygulamayı indirmemiş üye / indirmiş üye), ne zaman (tıklayınca, sayfa açılınca, oda kur/katıl düğmesinde), ne yapacağı (yönlendir / pencere / bant) ve ne sıklıkla gösterileceğini belirler. Kurallar sırayla denenir, ilk uyan çalışır. Yöneticiler, `/giris` ve `/admin` kurallardan muaftır; bu yüzden siteden dışarıda kalma riski yoktur. Her kuralın gösterim, tıklama ve kapatma sayaçları tutulur.
+
+Panelde ayrıca: kullanıcı arama/filtreleme, toplu işlemler, CSV dışa aktarma, kullanıcı notları, oda sohbetini görme, oda ve toplu duyuru, yavaş mod, yasaklı kelimeler, oda sınırı ve işlem günlüğü bulunur.
+
 ## Uygulama bağlantısı (config.js, yedek)
 
 `public/config.js` dosyasını doldur:

@@ -33,54 +33,22 @@
   <div class="page-head">
     <p class="eyebrow">Yönetim</p>
     <h1>Yönetim paneli</h1>
-    <p>Kullanıcılara oda kurma, odaya katılma, sohbet, başlatma ve indirme yetkisi ver; odaları buradan başlat veya kapat.</p>
+    <p>Kullanıcıları, yetkileri, odaları, yönlendirme kurallarını ve site ayarlarını buradan yönet.</p>
   </div>
-  <div class="stats" id="stats"></div>
   <div class="tabs" role="tablist" aria-label="Bölümler">
-    <button type="button" role="tab" data-tab="users" aria-selected="true">Kullanıcılar</button>
+    <button type="button" role="tab" data-tab="overview" aria-selected="true">Genel bakış</button>
+    <button type="button" role="tab" data-tab="users" aria-selected="false">Kullanıcılar</button>
     <button type="button" role="tab" data-tab="rooms" aria-selected="false">Odalar</button>
+    <button type="button" role="tab" data-tab="gates" aria-selected="false">Yönlendirmeler</button>
     <button type="button" role="tab" data-tab="settings" aria-selected="false">Ayarlar</button>
+    <button type="button" role="tab" data-tab="log" aria-selected="false">Günlük</button>
   </div>
-
-  <section id="tab-users" class="ulist-wrap">
-    <div class="toolbar">
-      <input type="search" id="q" placeholder="Kullanıcı ara…" aria-label="Kullanıcı ara">
-      <button class="btn line sm" type="button" id="reload-users">Yenile</button>
-    </div>
-    <p class="err" id="err-users" role="alert"></p>
-    <div class="ulist" id="ulist"></div>
-  </section>
-
-  <section id="tab-rooms" hidden>
-    <div class="toolbar"><button class="btn line sm" type="button" id="reload-rooms">Yenile</button><span class="note">Liste 5 saniyede bir kendiliğinden yenilenir.</span></div>
-    <p class="err" id="err-rooms" role="alert"></p>
-    <div class="rgridA" id="rlist"></div>
-  </section>
-
-  <section id="tab-settings" hidden>
-    <form class="panel" id="f-settings" novalidate>
-      <div class="form-grid">
-        <div class="field"><span>Kayıt</span>
-          <div class="radio-list" id="reg-list">
-            <label><input type="radio" name="registration" value="open"><div><b>Herkes kayıt olabilir</b><span>Kayıt olan hemen giriş yapar.</span></div></label>
-            <label><input type="radio" name="registration" value="approval"><div><b>Onayla</b><span>Yeni üyeler yönetici onaylayana kadar bekler.</span></div></label>
-            <label><input type="radio" name="registration" value="closed"><div><b>Kayıt kapalı</b><span>Yeni hesap oluşturulamaz.</span></div></label>
-          </div>
-        </div>
-        <div class="field"><span>Giriş yapmayanlar (misafir) yetkileri</span><div class="perms" id="guest-perms"></div>
-          <small class="hint">Kapalı olan işlem için giriş yapmak gerekir.</small></div>
-        <div class="field"><span>Yeni üyelerin başlangıç yetkileri</span><div class="perms" id="member-perms"></div>
-          <small class="hint">Yalnızca bundan sonra kayıt olanlara uygulanır. Mevcut üyeleri Kullanıcılar sekmesinden değiştir.</small></div>
-      </div>
-      <div class="form-grid">
-        <label class="field"><span>Uygulama indirme bağlantısı (https)</span><input id="app-url" type="url" inputmode="url" placeholder="https://…" maxlength="600"><small class="hint">İndirme yetkisi buradan uygulanır. Boş bırakırsan sitedeki <code>config.js</code> bağlantısı kullanılır; o dosya herkese açıktır ve yetkiyi denetleyemez.</small></label>
-        <label class="field"><span>Uygulamayı açan bağlantı (isteğe bağlı)</span><input id="app-open" placeholder="kartmasa://oda/{code}" maxlength="200"><small class="hint"><code>{code}</code> oda koduyla değişir.</small></label>
-      </div>
-      <p class="err" id="err-settings" role="alert"></p>
-      <p class="ok" id="ok-settings" role="status"></p>
-      <div><button class="btn hot" type="submit" id="save-settings">Ayarları kaydet</button></div>
-    </form>
-  </section>
+  <section id="tab-overview" class="tabbody"></section>
+  <section id="tab-users" class="tabbody" hidden></section>
+  <section id="tab-rooms" class="tabbody" hidden></section>
+  <section id="tab-gates" class="tabbody" hidden></section>
+  <section id="tab-settings" class="tabbody" hidden></section>
+  <section id="tab-log" class="tabbody" hidden></section>
 </main>
 
 <main class="page" id="gate">
@@ -93,6 +61,7 @@
 </div>
 <script src="/config.js"></script>
 <script src="/auth.js"></script>
+<script src="/gates.js"></script>
 <script src="/admin.js"></script>
 </body>
 </html>

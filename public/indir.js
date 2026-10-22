@@ -72,6 +72,10 @@
     p.textContent = 'Kurulum dosyası hazır. İndirdikten sonra çalıştırıp uygulamayı kur.';
     const dl = btn('hot lg', 'Uygulamayı indir', url);
     dl.rel = 'noopener noreferrer';
+    dl.addEventListener('click', () => {
+      try { localStorage.setItem('km-dl', '1'); } catch { /* depolama kapalı */ }
+      fetch('/api/auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ a: 'dl_click' }), keepalive: true, credentials: 'same-origin' }).catch(() => {});
+    });
     cta.appendChild(dl);
     if (openUrl) cta.appendChild(btn('line lg', 'Uygulamayı aç', openUrl.replace('{code}', '')));
   }

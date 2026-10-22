@@ -28,8 +28,8 @@
 .tabs { display: flex; gap: 4px; padding: 4px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px; width: fit-content; max-width: 100%; overflow-x: auto; }
 .tabs button { font: 700 .86rem/1 var(--font-body); color: var(--muted); background: none; border: 0; padding: 11px 18px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
 .tabs button[aria-selected="true"] { background: var(--hot); color: #fff; }
-.panel .field input, .panel .field select { font: 600 1rem/1 var(--font-body); color: var(--fg); background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 16px; width: 100%; }
-.panel .field input:focus { border-color: var(--hot); outline: none; }
+.panel .field input, .panel .field select, .rule-body .field input { font: 600 1rem/1 var(--font-body); color: var(--fg); background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 16px; width: 100%; }
+.panel .field input:focus, .rule-body .field input:focus { border-color: var(--hot); outline: none; }
 .hint { color: var(--muted); font-size: .82rem; }
 
 /* indirme */
@@ -206,3 +206,64 @@ span.perm { cursor: default; }
   .ts .av { width: 52px; height: 52px; }
 }
 @media (prefers-reduced-motion: reduce) { .ts .av { animation: none; } }
+
+/* ---------- üst çubuk: giriş yapınca taşmasın ---------- */
+.nav { gap: 0; margin-left: 4px; flex: 0 1 auto; min-width: 0; }
+.nav a { white-space: nowrap; padding: 8px 10px; }
+.bar { gap: 12px; }
+.bar-right { flex: none; }
+.acct-name { max-width: 96px; }
+.bar:has(.acct-btn) .pill { display: none; }
+.bar:has(.acct-btn) .app-dl { display: none; }
+@media (max-width: 1100px) { .nav a { padding: 8px 8px; font-size: .88rem; } }
+
+/* ---------- yönlendirme kuralları: duyuru bandı ---------- */
+.gate-banner { position: sticky; top: 0; z-index: 60; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 10px 48px 10px 16px; background: linear-gradient(90deg, var(--violet), var(--hot)); color: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, .35); }
+.gate-banner p { font-weight: 600; font-size: .95rem; text-align: center; }
+.gate-banner .btn.hot { background: #fff; color: #1a0d29; box-shadow: none; }
+.gate-x { position: absolute; right: 10px; top: 50%; translate: 0 -50%; width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(0, 0, 0, .25); color: #fff; font-size: 1.2rem; cursor: pointer; }
+.gate-modal { z-index: 90; }
+
+/* ---------- yönetim paneli: yeni bileşenler ---------- */
+.tabs { max-width: 100%; }
+.tabbody { display: grid; gap: 18px; min-width: 0; }
+.toolbar select, .uact select, .rule-body select, .field select { font: 600 .92rem/1 var(--font-body); color: var(--fg); background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 999px; padding: 11px 14px; min-width: 0; max-width: 100%; }
+.rule-body .field select { border-radius: 12px; padding: 14px 16px; width: 100%; }
+.field textarea { font: 500 .95rem/1.4 var(--font-body); color: var(--fg); background: var(--bg-2); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; width: 100%; resize: vertical; }
+.field textarea:focus, .field select:focus { border-color: var(--hot); outline: none; }
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 140px; }
+.bar-col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px; }
+.bar-col i { display: block; width: 100%; border-radius: 8px 8px 3px 3px; background: linear-gradient(180deg, var(--hot), var(--violet)); }
+.bar-col span { font: 700 .66rem/1 var(--font-mono); color: var(--muted); }
+.logmini p, .logrow { font-size: .9rem; color: var(--fg); }
+.logmini p small, .logrow small { color: var(--muted); font-family: var(--font-mono); }
+.logs { display: grid; gap: 6px; }
+.logrow { display: grid; grid-template-columns: 120px 190px 120px minmax(0, 1fr); gap: 10px; align-items: baseline; padding: 10px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.logrow span { overflow-wrap: anywhere; }
+.selbox { width: 20px; height: 20px; accent-color: var(--hot); flex: none; }
+.notein { font: 500 .88rem/1 var(--font-body); color: var(--fg); background: var(--bg-2); border: 1.5px dashed var(--line); border-radius: 12px; padding: 10px 14px; width: 100%; }
+.notein:focus { border-style: solid; border-color: var(--hot); outline: none; }
+.bulk { position: sticky; top: 76px; z-index: 15; display: grid; gap: 10px; padding: 14px 16px; background: var(--panel-2); border: 1px solid var(--hot); border-radius: 16px; box-shadow: 0 12px 30px rgba(0, 0, 0, .4); }
+.chatlog { max-height: 240px; overflow-y: auto; display: grid; gap: 6px; padding: 10px 12px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; font-size: .88rem; }
+.chatlog p { overflow-wrap: anywhere; }
+.chatlog small { color: var(--muted); font-family: var(--font-mono); }
+.sysmsg { color: var(--muted); }
+.rules-list { display: grid; gap: 12px; }
+.rule { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; display: grid; gap: 14px; min-width: 0; }
+.rule.on { border-color: rgba(25, 211, 166, .55); }
+.rule-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.rule-title { display: grid; flex: 1 1 220px; min-width: 0; }
+.rule-title b { overflow: hidden; text-overflow: ellipsis; }
+.rule-title small { color: var(--muted); }
+.rule-stats { display: flex; flex-wrap: wrap; gap: 4px 12px; font: 700 .72rem/1.2 var(--font-mono); color: var(--muted); }
+.rule-body { display: grid; gap: 14px; border-top: 1px solid var(--line); padding-top: 14px; }
+.sticky-save { position: sticky; bottom: 12px; z-index: 15; padding: 12px 14px; background: rgba(26, 13, 41, .94); border: 1px solid var(--line); border-radius: 16px; backdrop-filter: blur(10px); }
+@media (max-width: 760px) {
+  .logrow { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .bulk { top: 64px; }
+}
+
+.rule-body .field, .panel .field { align-content: start; align-self: start; }
+.rule-body .form-grid { align-items: start; }
+.field > .perms { margin-top: 2px; }
+.gate-modal .sheet h2 { padding-right: 40px; }
